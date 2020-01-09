@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "029a3267224a4495ebfb92ae91b5137a",
+    "content-hash": "97ecdab9d25e0b32ebd9811bba765168",
     "packages": [
         {
             "name": "infection/abstract-testframework-adapter",
-            "version": "0.2.1",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/abstract-testframework-adapter.git",
-                "reference": "07cd974a375303d631418c291ca5d2cecdf06fbf"
+                "reference": "8d22c268e2e3757e69d72478535a0a7e4d3e653c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/07cd974a375303d631418c291ca5d2cecdf06fbf",
-                "reference": "07cd974a375303d631418c291ca5d2cecdf06fbf",
+                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/8d22c268e2e3757e69d72478535a0a7e4d3e653c",
+                "reference": "8d22c268e2e3757e69d72478535a0a7e4d3e653c",
                 "shasum": ""
             },
             "type": "library",
@@ -37,7 +37,7 @@
                 }
             ],
             "description": "Abstract Test Framework Adapter for Infection",
-            "time": "2020-01-02T02:37:59+00:00"
+            "time": "2020-01-09T21:16:07+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -336,5 +336,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
-    "platform-dev": []
+    "platform-dev": [],
+    "platform-overrides": {
+        "php": "7.2.9"
+    }
 }

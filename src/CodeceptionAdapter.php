@@ -54,8 +54,6 @@ use Symfony\Component\Process\Process;
  */
 final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
-    public const EXECUTABLE = 'codecept';
-
     public const COVERAGE_DIR = 'codeception-coverage-xml';
 
     private const NAME = 'codeception';
