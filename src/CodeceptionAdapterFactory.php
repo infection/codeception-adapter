@@ -38,6 +38,7 @@ namespace Infection\TestFramework\Codeception;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\AbstractTestFramework\TestFrameworkAdapterFactory;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
+use Infection\TestFramework\CodeceptionConfigParseException;
 use LogicException;
 use function Safe\file_get_contents;
 use function Safe\sprintf;
@@ -45,9 +46,6 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
-/**
- * @internal
- */
 final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 {
     public static function create(
@@ -86,7 +84,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         try {
             $codeceptionConfigContentParsed = Yaml::parse($codeceptionConfigContent);
         } catch (ParseException $e) {
-            throw TestFrameworkConfigParseException::fromPath($codeceptionConfigPath, $e);
+            throw CodeceptionConfigParseException::fromPath($codeceptionConfigPath, $e);
         }
 
         return $codeceptionConfigContentParsed;

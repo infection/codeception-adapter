@@ -286,7 +286,7 @@ CONTENT;
         $originalBootstrap = $this->getOriginalBootstrapFilePath();
         $bootstrapPlaceholder = $originalBootstrap ? "require_once '{$originalBootstrap}';" : '';
 
-        $interceptorPath = dirname(__DIR__, 3) . '/StreamWrapper/IncludeInterceptor.php';
+        $interceptorPath = dirname(__DIR__, 2) . '/include-interceptor/src/IncludeInterceptor.php';
 
         $customBootstrap = <<<AUTOLOAD
 <?php
