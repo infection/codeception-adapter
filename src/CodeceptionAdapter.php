@@ -38,6 +38,7 @@ namespace Infection\TestFramework\Codeception;
 use Infection\AbstractTestFramework\Coverage\CoverageLineData;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
+use Infection\StreamWrapper\IncludeInterceptor;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use function array_key_exists;
 use function assert;
@@ -286,7 +287,8 @@ CONTENT;
         $originalBootstrap = $this->getOriginalBootstrapFilePath();
         $bootstrapPlaceholder = $originalBootstrap ? "require_once '{$originalBootstrap}';" : '';
 
-        $interceptorPath = dirname(__DIR__, 2) . '/include-interceptor/src/IncludeInterceptor.php';
+        $class = new \ReflectionClass(IncludeInterceptor::class);
+        $interceptorPath = $class->getFileName();
 
         $customBootstrap = <<<AUTOLOAD
 <?php
