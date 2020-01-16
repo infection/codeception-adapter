@@ -57,7 +57,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
     public const COVERAGE_DIR = 'codeception-coverage-xml';
 
-    private const NAME = 'codeception';
+    public const NAME = 'codeception';
 
     private const DEFAULT_ARGS_AND_OPTIONS = [
         'run',

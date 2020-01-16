@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c68fa4ec2197281451ef67194d68f351",
+    "content-hash": "37f0e90bfe0dead52ac22f5f29d77fe2",
     "packages": [
         {
             "name": "infection/abstract-testframework-adapter",
-            "version": "0.2.2",
+            "version": "0.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/infection/abstract-testframework-adapter.git",
-                "reference": "8d22c268e2e3757e69d72478535a0a7e4d3e653c"
+                "reference": "5235ec702bae66a5ee46bad28d571497708d7dac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/8d22c268e2e3757e69d72478535a0a7e4d3e653c",
-                "reference": "8d22c268e2e3757e69d72478535a0a7e4d3e653c",
+                "url": "https://api.github.com/repos/infection/abstract-testframework-adapter/zipball/5235ec702bae66a5ee46bad28d571497708d7dac",
+                "reference": "5235ec702bae66a5ee46bad28d571497708d7dac",
                 "shasum": ""
             },
             "type": "library",
@@ -37,7 +37,7 @@
                 }
             ],
             "description": "Abstract Test Framework Adapter for Infection",
-            "time": "2020-01-09T21:16:07+00:00"
+            "time": "2020-01-16T21:29:02+00:00"
         },
         {
             "name": "infection/include-interceptor",

@@ -74,6 +74,16 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         );
     }
 
+    public static function getAdapterName(): string
+    {
+        return CodeceptionAdapter::NAME;
+    }
+
+    public static function getExecutableName(): string
+    {
+        return 'codecept';
+    }
+
     /**
      * @return array<string, mixed>
      */
