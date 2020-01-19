@@ -41,12 +41,6 @@
             "class": "Infection\\TestFramework\\Codeception\\CodeceptionAdapterFactory"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url":  "git@github.com:maks-rafalko/infection-include-interceptor.git"
-        }
-    ],
     "require-dev": {
         "phpunit/phpunit": "^8.5"
     }
