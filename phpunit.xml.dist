@@ -9,7 +9,7 @@
 
     <testsuites>
         <testsuite name="Main Test Suite">
-            <directory>tests</directory>
+            <directory>tests/phpunit</directory>
         </testsuite>
     </testsuites>
 

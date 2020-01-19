@@ -16,10 +16,10 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Infection\\Tests\\TestFramework\\Codeception\\": "tests/"
+            "Infection\\Tests\\TestFramework\\Codeception\\": "tests/phpunit"
         },
         "files": [
-            "tests/Helpers.php"
+            "tests/phpunit/Helpers.php"
         ]
     },
     "config": {
