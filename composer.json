@@ -30,7 +30,7 @@
     },
     "require": {
         "infection/abstract-testframework-adapter": "^0.2.3",
-        "infection/include-interceptor": "^0.1.0",
+        "infection/include-interceptor": "^0.2.0",
         "symfony/filesystem": "^3.4.29 || ^4.0 || ^5.0",
         "symfony/process": "^3.4.29 || ^4.0 || ^5.0",
         "symfony/yaml": "^3.4.29 || ^4.0 || ^5.0",
