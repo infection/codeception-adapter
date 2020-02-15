@@ -33,8 +33,7 @@
         "infection/include-interceptor": "^0.2.0",
         "symfony/filesystem": "^3.4.29 || ^4.0 || ^5.0",
         "symfony/process": "^3.4.29 || ^4.0 || ^5.0",
-        "symfony/yaml": "^3.4.29 || ^4.0 || ^5.0",
-        "thecodingmachine/safe": "^1.0"
+        "symfony/yaml": "^3.4.29 || ^4.0 || ^5.0"
     },
     "extra": {
         "infection": {
@@ -42,6 +41,16 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "infection/infection": "^0.15.2",
+        "php-coveralls/php-coveralls": "^2.2",
+        "phpstan/extension-installer": "^1.0",
+        "phpstan/phpstan": "^0.12.10",
+        "phpstan/phpstan-phpunit": "^0.12.6",
+        "phpstan/phpstan-strict-rules": "^0.12.2",
+        "phpstan/phpstan-webmozart-assert": "^0.12.2",
+        "phpunit/phpunit": "^8.5",
+        "thecodingmachine/safe": "^0.1.16",
+        "vimeo/psalm": "^3.8"
     }
 }

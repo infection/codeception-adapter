@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/infection/codeception-adapter.svg?branch=master)](https://travis-ci.org/infection/codeception-adapter)
+[![Coverage Status](https://coveralls.io/repos/github/infection/codeception-adapter/badge.svg?branch=master)](https://coveralls.io/github/infection/codeception-adapter?branch=master)
+
 # Codeception Test Framework Adapter for Infection
 
 This is a repository for Codeception Test Framework Adapter

@@ -35,9 +35,9 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception\Coverage;
 
-use Infection\AbstractTestFramework\Coverage\CoverageLineData;
 use function assert;
 use function in_array;
+use Infection\AbstractTestFramework\Coverage\CoverageLineData;
 use function is_string;
 
 /**
@@ -57,7 +57,7 @@ final class JUnitTestCaseSorter
         // sort tests to run the fastest first
         usort(
             $uniqueCoverageTests,
-            static function (CoverageLineData $a, CoverageLineData $b) {
+            static function (CoverageLineData $a, CoverageLineData $b): int {
                 return $a->time <=> $b->time;
             }
         );

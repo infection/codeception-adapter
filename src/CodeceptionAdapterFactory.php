@@ -38,7 +38,6 @@ namespace Infection\TestFramework\Codeception;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\AbstractTestFramework\TestFrameworkAdapterFactory;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
-use Infection\TestFramework\CodeceptionConfigParseException;
 use LogicException;
 use function Safe\file_get_contents;
 use function Safe\sprintf;
@@ -48,6 +47,9 @@ use Symfony\Component\Yaml\Yaml;
 
 final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 {
+    /**
+     * @param string[] $sourceDirectories
+     */
     public static function create(
         string $testFrameworkExecutable,
         string $tmpDir,

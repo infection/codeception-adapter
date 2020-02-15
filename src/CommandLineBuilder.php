@@ -45,7 +45,7 @@ use Symfony\Component\Process\PhpExecutableFinder;
 final class CommandLineBuilder
 {
     /**
-     * @var array|null
+     * @var string[]|null
      */
     private $cachedPhpCmdLine;
 
@@ -101,6 +101,8 @@ final class CommandLineBuilder
                 throw FinderException::phpExecutableNotFound();
             }
 
+            $phpCmd = [];
+
             $phpCmd[] = $phpExec;
 
             if (PHP_SAPI === 'phpdbg') {
@@ -115,6 +117,6 @@ final class CommandLineBuilder
 
     private function isBatchFile(string $path): bool
     {
-        return '.bat' === substr($path, -4);
+        return substr($path, -4) === '.bat';
     }
 }

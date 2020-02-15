@@ -36,7 +36,6 @@ declare(strict_types=1);
 namespace Infection\Tests\TestFramework\Codeception;
 
 use const DIRECTORY_SEPARATOR;
-use Generator;
 use function random_int;
 use function realpath;
 use function str_replace;
@@ -66,7 +65,7 @@ function normalizePath(string $value): string
  */
 function make_tmp_dir(string $namespace, string $className): string
 {
-    if (false !== ($pos = strrpos($className, '\\'))) {
+    if (($pos = strrpos($className, '\\')) !== false) {
         $shortClass = substr($className, $pos + 1);
     } else {
         $shortClass = $className;
@@ -76,7 +75,7 @@ function make_tmp_dir(string $namespace, string $className): string
     // symlink to another directory (e.g. /var => /private/var on some Macs)
     // We want to know the real path to avoid comparison failures with
     // code that uses real paths only
-    $systemTempDir = str_replace('\\', '/', realpath(sys_get_temp_dir()));
+    $systemTempDir = str_replace('\\', '/', (string) realpath(sys_get_temp_dir()));
     $basePath = $systemTempDir . '/' . $namespace . '/' . $shortClass;
 
     $result = false;
@@ -93,7 +92,7 @@ function make_tmp_dir(string $namespace, string $className): string
         } catch (IOException $exception) {
             ++$attempts;
         }
-    } while (false === $result && $attempts <= 10);
+    } while ($result === false && $attempts <= 10);
 
     return $tmpDir;
 }

@@ -35,24 +35,21 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception;
 
+use function array_key_exists;
+use function assert;
 use Infection\AbstractTestFramework\Coverage\CoverageLineData;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\StreamWrapper\IncludeInterceptor;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
-use function array_key_exists;
-use function assert;
-use function dirname;
 use InvalidArgumentException;
 use function is_string;
 use Phar;
+use ReflectionClass;
 use function Safe\file_put_contents;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 
-/**
- * @internal
- */
 final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
     public const COVERAGE_DIR = 'codeception-coverage-xml';
@@ -82,7 +79,8 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     private $cachedVersion;
 
     /**
-     * @param  array<string, mixed> $originalConfigContentParsed
+     * @param array<string, mixed> $originalConfigContentParsed
+     * @param array<string> $srcDirs
      */
     public function __construct(
         string $testFrameworkExecutable,
@@ -115,29 +113,29 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
     public function testsPass(string $output): bool
     {
-        if (preg_match('/failures!/i', $output)) {
+        if (preg_match('/failures!/i', $output) > 0) {
             return false;
         }
 
-        if (preg_match('/errors!/i', $output)) {
+        if (preg_match('/errors!/i', $output) > 0) {
             return false;
         }
 
         // OK (XX tests, YY assertions)
-        $isOk = preg_match('/OK\s\(/', $output);
+        $isOk = preg_match('/OK\s\(/', $output) > 0;
 
         // "OK, but incomplete, skipped, or risky tests!"
-        $isOkWithInfo = preg_match('/OK\s?,/', $output);
+        $isOkWithInfo = preg_match('/OK\s?,/', $output) > 0;
 
         // "Warnings!" - e.g. when deprecated functions are used, but tests pass
-        $isWarning = preg_match('/warnings!/i', $output);
+        $isWarning = preg_match('/warnings!/i', $output) > 0;
 
         return $isOk || $isOkWithInfo || $isWarning;
     }
 
     public function getMemoryUsed(string $output): float
     {
-        if (preg_match('/Memory: (\d+(?:\.\d+))\s*MB/', $output, $match)) {
+        if (preg_match('/Memory: (\d+(?:\.\d+))\s*MB/', $output, $match) > 0) {
             return (float) $match[1];
         }
 
@@ -261,7 +259,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     {
         $infectionPhar = '';
 
-        if (0 === strpos(__FILE__, 'phar:')) {
+        if (strpos(__FILE__, 'phar:') === 0) {
             $infectionPhar = sprintf(
                 '\Phar::loadPhar("%s", "%s");',
                 str_replace('phar://', '', Phar::running(true)),
@@ -285,9 +283,9 @@ CONTENT;
     private function createCustomBootstrapWithInterceptor(string $originalFilePath, string $mutatedFilePath): string
     {
         $originalBootstrap = $this->getOriginalBootstrapFilePath();
-        $bootstrapPlaceholder = $originalBootstrap ? "require_once '{$originalBootstrap}';" : '';
+        $bootstrapPlaceholder = $originalBootstrap !== null && strlen($originalBootstrap) > 0 ? "require_once '{$originalBootstrap}';" : '';
 
-        $class = new \ReflectionClass(IncludeInterceptor::class);
+        $class = new ReflectionClass(IncludeInterceptor::class);
         $interceptorPath = $class->getFileName();
 
         $customBootstrap = <<<AUTOLOAD
@@ -301,7 +299,7 @@ AUTOLOAD;
         return sprintf(
             $customBootstrap,
             $bootstrapPlaceholder,
-            $this->getInterceptorFileContent($interceptorPath, $originalFilePath, $mutatedFilePath)
+            $this->getInterceptorFileContent((string) $interceptorPath, $originalFilePath, $mutatedFilePath)
         );
     }
 
@@ -354,7 +352,7 @@ AUTOLOAD;
         $includedFiles = array_key_exists('include', $coverage)
             ? $coverage['include']
             : array_map(
-                static function ($dir) {
+                static function ($dir): string {
                     return trim($dir, '/') . '/*.php';
                 },
                 $this->srcDirs

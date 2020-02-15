@@ -47,15 +47,17 @@ final class StringifierTest extends TestCase
      */
     public function test_stringify_boolean(bool $boolean, string $expectedStringBoolean): void
     {
-        $this->assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
+        self::assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
     }
 
     /**
      * @dataProvider provideArrayOfStrings
+     *
+     * @param string[] $arrayOfStrings
      */
     public function test_stringify_array_of_strings(array $arrayOfStrings, string $expectedStringArray): void
     {
-        $this->assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
+        self::assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
     }
 
     public function test_stringify_array_of_strings_works_only_with_array_of_strings(): void
@@ -67,6 +69,9 @@ final class StringifierTest extends TestCase
         Stringifier::stringifyArray($arrayOfInts);
     }
 
+    /**
+     * @return Generator<string, array{0: bool, 1: string}>
+     */
     public function provideBooleanStrings(): Generator
     {
         yield 'True' => [true, 'true'];
@@ -74,6 +79,9 @@ final class StringifierTest extends TestCase
         yield 'False' => [false, 'false'];
     }
 
+    /**
+     * @return Generator<string, array{0: string[], 1: string}>
+     */
     public function provideArrayOfStrings(): Generator
     {
         yield 'Empty array' => [[], '[]'];

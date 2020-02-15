@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="3.8.5@e6ec5fa22a7b9e61670a24d07b3119aff80dcd89">
+  <file src="src/CodeceptionAdapter.php">
+    <MixedArgument occurrences="5">
+      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
+      <code>$this-&gt;originalConfigContentParsed['paths']['tests'] ?? 'tests'</code>
+      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
+      <code>$this-&gt;originalConfigContentParsed['coverage'] ?? []</code>
+      <code>$includedFiles</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$includedFiles</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>?string</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/CodeceptionAdapterFactory.php">
+    <MixedArgument occurrences="1">
+      <code>\Codeception\Codecept::VERSION</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="1">
+      <code>$codeceptionConfigContentParsed</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array&lt;string, mixed&gt;</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$codeceptionConfigContentParsed</code>
+    </MixedReturnStatement>
+    <MoreSpecificImplementedParamType occurrences="1">
+      <code>$sourceDirectories</code>
+    </MoreSpecificImplementedParamType>
+    <UndefinedClass occurrences="2">
+      <code>\Codeception\Codecept</code>
+      <code>\Codeception\Codecept</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/CommandLineBuilder.php">
+    <ForbiddenCode occurrences="1">
+      <code>`command -v php`</code>
+    </ForbiddenCode>
+  </file>
+</files>

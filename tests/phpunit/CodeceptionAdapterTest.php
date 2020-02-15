@@ -78,13 +78,13 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     {
         parent::setUp();
 
-        $this->pathToProject = p(realpath(__DIR__ . '/Fixtures/Files/codeception'));
+        $this->pathToProject = p((string) realpath(__DIR__ . '/Fixtures/Files/codeception'));
     }
 
     public function test_it_has_a_name(): void
     {
         $adapter = $this->createAdapter();
-        $this->assertSame('codeception', $adapter->getName());
+        self::assertSame('codeception', $adapter->getName());
     }
 
     /**
@@ -95,13 +95,14 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $result = $adapter->testsPass($output);
 
-        $this->assertSame($expectedResult, $result);
+        self::assertSame($expectedResult, $result);
     }
 
     public function test_it_conforms_to_memory_usage_aware(): void
     {
         $adapter = $this->createAdapter();
-        $this->assertInstanceOf(MemoryUsageAware::class, $adapter);
+
+        self::assertInstanceOf(MemoryUsageAware::class, $adapter);
     }
 
     /**
@@ -112,9 +113,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $result = $adapter->getMemoryUsed($output);
 
-        $this->assertSame($expectedResult, $result);
+        self::assertSame($expectedResult, $result);
     }
 
+    /**
+     * @return Generator<int, array{0: string, 1: float}>
+     */
     public function memoryReportProvider(): Generator
     {
         yield ['Memory: 8.00MB', 8.0];
@@ -126,6 +130,9 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         yield ['Time: 2.51 seconds', -1.0];
     }
 
+    /**
+     * @return Generator<int, array{0: string, 1: bool}>
+     */
     public function passProvider(): Generator
     {
         yield ['OK, but incomplete, skipped, or risky tests!', true];
@@ -142,8 +149,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
-        $this->assertContains('--coverage-phpunit', $commandLine);
-        $this->assertContains(CodeceptionAdapter::COVERAGE_DIR, $commandLine);
+        self::assertContains('--coverage-phpunit', $commandLine);
+        self::assertContains(CodeceptionAdapter::COVERAGE_DIR, $commandLine);
     }
 
     public function test_it_sets_junit_xml_path(): void
@@ -151,8 +158,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
-        $this->assertContains('--xml', $commandLine);
-        $this->assertContains('path/to/junit', $commandLine);
+        self::assertContains('--xml', $commandLine);
+        self::assertContains('path/to/junit', $commandLine);
     }
 
     public function test_it_sets_the_output_dir_to_tmp_dir(): void
@@ -160,7 +167,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
-        $this->assertContains(sprintf('paths: output: %s', $this->tmp), $commandLine);
+        self::assertContains(sprintf('paths: output: %s', $this->tmp), $commandLine);
     }
 
     public function test_it_enables_coverage_if_not_skipped(): void
@@ -168,7 +175,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
-        $this->assertContains('coverage: enabled: true', $commandLine);
+        self::assertContains('coverage: enabled: true', $commandLine);
     }
 
     public function test_it_disables_coverage_if_skipped(): void
@@ -176,8 +183,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
-        $this->assertContains('coverage: enabled: false', $commandLine);
-        $this->assertContains('coverage: include: []', $commandLine);
+        self::assertContains('coverage: enabled: false', $commandLine);
+        self::assertContains('coverage: include: []', $commandLine);
     }
 
     public function test_it_populates_include_coverage_key_from_src_folders_if_not_set(): void
@@ -185,7 +192,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
-        $this->assertContains('coverage: include: [projectSrc/dir/*.php]', $commandLine);
+        self::assertContains('coverage: include: [projectSrc/dir/*.php]', $commandLine);
     }
 
     public function test_it_runs_tests_with_a_random_order(): void
@@ -193,7 +200,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $adapter = $this->createAdapter();
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
-        $this->assertContains('settings: shuffle: true', $commandLine);
+        self::assertContains('settings: shuffle: true', $commandLine);
     }
 
     public function test_it_disables_coverage_for_mutant_command_line(): void
@@ -207,7 +214,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             ''
         );
 
-        $this->assertContains('coverage: enabled: false', $commandLine);
+        self::assertContains('coverage: enabled: false', $commandLine);
     }
 
     public function test_it_adds_extra_options_for_mutant_command_line(): void
@@ -221,7 +228,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             '--filter=xyz'
         );
 
-        $this->assertContains('--filter=xyz', $commandLine);
+        self::assertContains('--filter=xyz', $commandLine);
     }
 
     public function test_it_sets_infection_group(): void
@@ -235,8 +242,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             '--filter=xyz'
         );
 
-        $this->assertContains('--group', $commandLine);
-        $this->assertContains('infection', $commandLine);
+        self::assertContains('--group', $commandLine);
+        self::assertContains('infection', $commandLine);
     }
 
     public function test_it_sets_bootstrap_file(): void
@@ -250,7 +257,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             '--filter=xyz'
         );
 
-        $this->assertContains('--bootstrap', $commandLine);
+        self::assertContains('--bootstrap', $commandLine);
     }
 
     public function test_it_creates_interceptor_file(): void
@@ -267,7 +274,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
 
         $expectedConfigPath = $this->tmp . '/interceptor.codeception.a1b2c3.php';
 
-        $this->assertFileExists($expectedConfigPath);
+        self::assertFileExists($expectedConfigPath);
     }
 
     public function test_it_does_not_add_original_bootstrap_to_the_created_config_file_if_not_exists(): void
@@ -282,9 +289,9 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             ''
         );
 
-        $this->assertStringNotContainsString(
+        self::assertStringNotContainsString(
             'bootstrap',
-            file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
         );
     }
 
@@ -307,9 +314,9 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             ''
         );
 
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             "require_once '/original/bootstrap.php';",
-            file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
         );
     }
 
@@ -332,9 +339,9 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             ''
         );
 
-        $this->assertStringContainsString(
+        self::assertStringContainsString(
             "tests/original/bootstrap.php';",
-            file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
         );
     }
 
@@ -342,14 +349,17 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     {
         $adapter = $this->createAdapter();
 
-        $this->assertTrue($adapter->hasJUnitReport(), 'Codeception Framework must have JUnit report');
+        self::assertTrue($adapter->hasJUnitReport(), 'Codeception Framework must have JUnit report');
     }
 
     public function test_codeception_name(): void
     {
-        $this->assertSame('codeception', $this->createAdapter()->getName());
+        self::assertSame('codeception', $this->createAdapter()->getName());
     }
 
+    /**
+     * @param array<string, mixed>|null $config
+     */
     private function createAdapter(?array $config = null): CodeceptionAdapter
     {
         return new CodeceptionAdapter(
