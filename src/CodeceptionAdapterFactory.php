@@ -38,9 +38,7 @@ namespace Infection\TestFramework\Codeception;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\AbstractTestFramework\TestFrameworkAdapterFactory;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
-use LogicException;
 use function Safe\file_get_contents;
-use function Safe\sprintf;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
@@ -60,8 +58,6 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         array $sourceDirectories,
         bool $skipCoverage
     ): TestFrameworkAdapter {
-        self::ensureCodeceptionVersionIsSupported();
-
         return new CodeceptionAdapter(
             $testFrameworkExecutable,
             new CommandLineBuilder(),
@@ -100,21 +96,5 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         }
 
         return $codeceptionConfigContentParsed;
-    }
-
-    private static function ensureCodeceptionVersionIsSupported(): void
-    {
-        if (!class_exists('\Codeception\Codecept')) {
-            return;
-        }
-
-        if (version_compare(\Codeception\Codecept::VERSION, '3.1.1', '<')) {
-            throw new LogicException(
-                sprintf(
-                    'Current Codeception version "%s" is not supported by Infection. Please use >=3.1.1',
-                    \Codeception\Codecept::VERSION
-                )
-            );
-        }
     }
 }

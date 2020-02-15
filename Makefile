@@ -34,8 +34,8 @@ COMPOSER=$(PHP) $(shell which composer)
 
 # Infection
 INFECTION=vendor/bin/infection
-MIN_MSI=75
-MIN_COVERED_MSI=97
+MIN_MSI=76
+MIN_COVERED_MSI=98
 INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=default --show-mutations
 
 all: test

@@ -6,11 +6,6 @@ parameters:
 			path: src/CodeceptionAdapterFactory.php
 
 		-
-			message: "#^Access to constant VERSION on an unknown class Codeception\\\\Codecept\\.$#"
-			count: 2
-			path: src/CodeceptionAdapterFactory.php
-
-		-
 			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:allString\\(\\) with array\\<string\\> will always evaluate to true\\.$#"
 			count: 1
 			path: src/Stringifier.php

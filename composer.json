@@ -52,5 +52,8 @@
         "phpunit/phpunit": "^8.5",
         "thecodingmachine/safe": "^0.1.16",
         "vimeo/psalm": "^3.8"
+    },
+    "conflict": {
+        "codeception/codeception": "<3.1.1"
     }
 }
