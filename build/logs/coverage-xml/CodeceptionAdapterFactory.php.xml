@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <file name="CodeceptionAdapterFactory.php" path="/">
+    <totals>
+      <lines total="100" comments="37" code="63" executable="14" executed="10" percent="71.43"/>
+      <methods count="4" tested="1" percent="25.00"/>
+      <functions count="0" tested="0" percent="0"/>
+      <classes count="1" tested="0" percent="0.00"/>
+      <traits count="0" tested="0" percent="0"/>
+    </totals>
+    <class name="Infection\TestFramework\Codeception\CodeceptionAdapterFactory" start="46" executable="14" executed="10" crap="6.84">
+      <package full="" name="" sub="" category=""/>
+      <namespace name="Infection\TestFramework\Codeception"/>
+      <method name="create" signature="create(&#10;        string $testFrameworkExecutable,&#10;        string $tmpDir,&#10;        string $testFrameworkConfigPath,&#10;        ?string $testFrameworkConfigDir,&#10;        string $jUnitFilePath,&#10;        string $projectDir,&#10;        array $sourceDirectories,&#10;        bool $skipCoverage&#10;    ): TestFrameworkAdapter" start="51" end="73" crap="2" executable="7" executed="7" coverage="100"/>
+      <method name="getAdapterName" signature="getAdapterName(): string" start="75" end="78" crap="2" executable="1" executed="0" coverage="0"/>
+      <method name="getExecutableName" signature="getExecutableName(): string" start="80" end="83" crap="2" executable="1" executed="0" coverage="0"/>
+      <method name="parseYaml" signature="parseYaml(string $codeceptionConfigPath): array" start="88" end="99" crap="2.26" executable="5" executed="3" coverage="60"/>
+    </class>
+    <coverage>
+      <line nr="61">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="63">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="64">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="65">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="66">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="70">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="62">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="90">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="93">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+      <line nr="98">
+        <covered by="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter"/>
+      </line>
+    </coverage>
+    <source>
+      <line no="1">
+        <token name="T_OPEN_TAG">&lt;?php</token>
+      </line>
+      <line no="2">
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="3">
+        <token name="T_DOC_COMMENT"> * This code is licensed under the BSD 3-Clause License.</token>
+      </line>
+      <line no="4">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="5">
+        <token name="T_DOC_COMMENT"> * Copyright (c) 2017, Maks Rafalko</token>
+      </line>
+      <line no="6">
+        <token name="T_DOC_COMMENT"> * All rights reserved.</token>
+      </line>
+      <line no="7">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="8">
+        <token name="T_DOC_COMMENT"> * Redistribution and use in source and binary forms, with or without</token>
+      </line>
+      <line no="9">
+        <token name="T_DOC_COMMENT"> * modification, are permitted provided that the following conditions are met:</token>
+      </line>
+      <line no="10">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="11">
+        <token name="T_DOC_COMMENT"> * * Redistributions of source code must retain the above copyright notice, this</token>
+      </line>
+      <line no="12">
+        <token name="T_DOC_COMMENT"> *   list of conditions and the following disclaimer.</token>
+      </line>
+      <line no="13">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="14">
+        <token name="T_DOC_COMMENT"> * * Redistributions in binary form must reproduce the above copyright notice,</token>
+      </line>
+      <line no="15">
+        <token name="T_DOC_COMMENT"> *   this list of conditions and the following disclaimer in the documentation</token>
+      </line>
+      <line no="16">
+        <token name="T_DOC_COMMENT"> *   and/or other materials provided with the distribution.</token>
+      </line>
+      <line no="17">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="18">
+        <token name="T_DOC_COMMENT"> * * Neither the name of the copyright holder nor the names of its</token>
+      </line>
+      <line no="19">
+        <token name="T_DOC_COMMENT"> *   contributors may be used to endorse or promote products derived from</token>
+      </line>
+      <line no="20">
+        <token name="T_DOC_COMMENT"> *   this software without specific prior written permission.</token>
+      </line>
+      <line no="21">
+        <token name="T_DOC_COMMENT"> *</token>
+      </line>
+      <line no="22">
+        <token name="T_DOC_COMMENT"> * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"</token>
+      </line>
+      <line no="23">
+        <token name="T_DOC_COMMENT"> * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</token>
+      </line>
+      <line no="24">
+        <token name="T_DOC_COMMENT"> * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE</token>
+      </line>
+      <line no="25">
+        <token name="T_DOC_COMMENT"> * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE</token>
+      </line>
+      <line no="26">
+        <token name="T_DOC_COMMENT"> * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL</token>
+      </line>
+      <line no="27">
+        <token name="T_DOC_COMMENT"> * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR</token>
+      </line>
+      <line no="28">
+        <token name="T_DOC_COMMENT"> * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER</token>
+      </line>
+      <line no="29">
+        <token name="T_DOC_COMMENT"> * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,</token>
+      </line>
+      <line no="30">
+        <token name="T_DOC_COMMENT"> * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE</token>
+      </line>
+      <line no="31">
+        <token name="T_DOC_COMMENT"> * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</token>
+      </line>
+      <line no="32">
+        <token name="T_DOC_COMMENT"> */</token>
+      </line>
+      <line no="33"/>
+      <line no="34">
+        <token name="T_DECLARE">declare</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">strict_types</token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_LNUMBER">1</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="35"/>
+      <line no="36">
+        <token name="T_NAMESPACE">namespace</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Infection</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">TestFramework</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Codeception</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="37"/>
+      <line no="38">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Infection</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">AbstractTestFramework</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">TestFrameworkAdapter</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="39">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Infection</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">AbstractTestFramework</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">TestFrameworkAdapterFactory</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="40">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Infection</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">TestFramework</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Codeception</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Coverage</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">JUnitTestCaseSorter</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="41">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Safe</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">file_get_contents</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="42">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Symfony</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Component</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Filesystem</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Filesystem</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="43">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Symfony</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Component</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Yaml</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Exception</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">ParseException</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="44">
+        <token name="T_USE">use</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Symfony</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Component</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Yaml</token>
+        <token name="T_NS_SEPARATOR">\</token>
+        <token name="T_STRING">Yaml</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="45"/>
+      <line no="46">
+        <token name="T_FINAL">final</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CLASS">class</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CodeceptionAdapterFactory</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_IMPLEMENTS">implements</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">TestFrameworkAdapterFactory</token>
+      </line>
+      <line no="47">
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="48">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="49">
+        <token name="T_DOC_COMMENT">     * @param string[] $sourceDirectories</token>
+      </line>
+      <line no="50">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="51">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">create</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="52">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$testFrameworkExecutable</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="53">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$tmpDir</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="54">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$testFrameworkConfigPath</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="55">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_QUESTION_MARK">?</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$testFrameworkConfigDir</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="56">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$jUnitFilePath</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="57">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$projectDir</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="58">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_ARRAY">array</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$sourceDirectories</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="59">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_STRING">bool</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$skipCoverage</token>
+      </line>
+      <line no="60">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">TestFrameworkAdapter</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="61">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CodeceptionAdapter</token>
+        <token name="T_OPEN_BRACKET">(</token>
+      </line>
+      <line no="62">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$testFrameworkExecutable</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="63">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CommandLineBuilder</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="64">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">VersionParser</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="65">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">JUnitTestCaseSorter</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="66">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_NEW">new</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Filesystem</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="67">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$jUnitFilePath</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="68">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$tmpDir</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="69">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$projectDir</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="70">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_STRING">self</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">parseYaml</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$testFrameworkConfigPath</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COMMA">,</token>
+      </line>
+      <line no="71">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$sourceDirectories</token>
+      </line>
+      <line no="72">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="73">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="74"/>
+      <line no="75">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getAdapterName</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="76">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="77">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CodeceptionAdapter</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">NAME</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="78">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="79"/>
+      <line no="80">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PUBLIC">public</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">getExecutableName</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">string</token>
+      </line>
+      <line no="81">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="82">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CONSTANT_ENCAPSED_STRING">'codecept'</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="83">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="84"/>
+      <line no="85">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_DOC_COMMENT">/**</token>
+      </line>
+      <line no="86">
+        <token name="T_DOC_COMMENT">     * @return array&lt;string, mixed&gt;</token>
+      </line>
+      <line no="87">
+        <token name="T_DOC_COMMENT">     */</token>
+      </line>
+      <line no="88">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_PRIVATE">private</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STATIC">static</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_FUNCTION">function</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">parseYaml</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">string</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$codeceptionConfigPath</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_COLON">:</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_ARRAY">array</token>
+      </line>
+      <line no="89">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="90">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_VARIABLE">$codeceptionConfigContent</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">file_get_contents</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$codeceptionConfigPath</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="91"/>
+      <line no="92">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_TRY">try</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="93">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_VARIABLE">$codeceptionConfigContentParsed</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_EQUAL">=</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">Yaml</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">parse</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$codeceptionConfigContent</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="94">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_CATCH">catch</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_STRING">ParseException</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_OPEN_CURLY">{</token>
+      </line>
+      <line no="95">
+        <token name="T_WHITESPACE">            </token>
+        <token name="T_THROW">throw</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_STRING">CodeceptionConfigParseException</token>
+        <token name="T_DOUBLE_COLON">::</token>
+        <token name="T_STRING">fromPath</token>
+        <token name="T_OPEN_BRACKET">(</token>
+        <token name="T_VARIABLE">$codeceptionConfigPath</token>
+        <token name="T_COMMA">,</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$e</token>
+        <token name="T_CLOSE_BRACKET">)</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="96">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="97"/>
+      <line no="98">
+        <token name="T_WHITESPACE">        </token>
+        <token name="T_RETURN">return</token>
+        <token name="T_WHITESPACE"> </token>
+        <token name="T_VARIABLE">$codeceptionConfigContentParsed</token>
+        <token name="T_SEMICOLON">;</token>
+      </line>
+      <line no="99">
+        <token name="T_WHITESPACE">    </token>
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="100">
+        <token name="T_CLOSE_CURLY">}</token>
+      </line>
+      <line no="101"/>
+    </source>
+  </file>
+</phpunit>

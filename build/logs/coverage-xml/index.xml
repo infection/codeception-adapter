@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<phpunit xmlns="https://schema.phpunit.de/coverage/1.0">
+  <build time="Sat Mar 14 19:57:03 GMT+0000 2020" phpunit="8.5.2" coverage="7.0.10">
+    <runtime name="PHP" version="7.3.15" url="https://secure.php.net/"/>
+    <driver name="pcov" version="1.0.6"/>
+  </build>
+  <project source="/Users/tfidry/Project/Humbug/codeception-adapter/src">
+    <tests>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_array_of_strings with data set &quot;Empty array&quot;" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_array_of_strings with data set &quot;One element&quot;" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_array_of_strings with data set &quot;Several elements&quot;" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_array_of_strings_works_only_with_array_of_strings" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_boolean with data set &quot;False&quot;" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\StringifierTest::test_stringify_boolean with data set &quot;True&quot;" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterFactoryTest::test_it_creates_codeception_adapter" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_adds_extra_options_for_mutant_command_line" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_used_memory_amount with data set #3" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_used_memory_amount with data set #2" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_used_memory_amount with data set #1" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_used_memory_amount with data set #0" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_has_junit_report" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_adds_original_bootstrap_to_the_created_config_file_with_relative_path" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_disables_coverage_if_skipped" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_codeception_name" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_sets_the_output_dir_to_tmp_dir" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_creates_interceptor_file" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_whether_tests_pass_or_not with data set #3" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_whether_tests_pass_or_not with data set #0" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_whether_tests_pass_or_not with data set #2" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_determines_whether_tests_pass_or_not with data set #1" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_disables_coverage_for_mutant_command_line" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_populates_include_coverage_key_from_src_folders_if_not_set" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_adds_original_bootstrap_to_the_created_config_file_with_absolute_path" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_sets_bootstrap_file" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_does_not_add_original_bootstrap_to_the_created_config_file_if_not_exists" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_runs_tests_with_a_random_order" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_has_a_name" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_enables_coverage_if_not_skipped" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_sets_coverage_phpunit_dir" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_sets_junit_xml_path" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_sets_infection_group" size="unknown" result="0" status="PASSED"/>
+      <test name="Infection\Tests\TestFramework\Codeception\CodeceptionAdapterTest::test_it_conforms_to_memory_usage_aware" size="unknown" result="0" status="PASSED"/>
+    </tests>
+    <directory name="/">
+      <totals>
+        <lines total="856" comments="299" code="557" executable="188" executed="137" percent="72.87"/>
+        <methods count="29" tested="15" percent="51.72"/>
+        <functions count="0" tested="0" percent="0"/>
+        <classes count="7" tested="0" percent="0.00"/>
+        <traits count="0" tested="0" percent="0"/>
+      </totals>
+      <directory name="Coverage">
+        <totals>
+          <lines total="98" comments="46" code="52" executable="16" executed="9" percent="56.25"/>
+          <methods count="2" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+        <file name="JUnitTestCaseSorter.php" href="Coverage/JUnitTestCaseSorter.php.xml">
+          <totals>
+            <lines total="98" comments="46" code="52" executable="16" executed="9" percent="56.25"/>
+            <methods count="2" tested="0" percent="0.00"/>
+            <functions count="0" tested="0" percent="0"/>
+            <classes count="1" tested="0" percent="0.00"/>
+            <traits count="0" tested="0" percent="0"/>
+          </totals>
+        </file>
+      </directory>
+      <file name="CodeceptionAdapter.php" href="CodeceptionAdapter.php.xml">
+        <totals>
+          <lines total="363" comments="56" code="307" executable="120" executed="99" percent="82.50"/>
+          <methods count="15" tested="11" percent="73.33"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="CodeceptionAdapterFactory.php" href="CodeceptionAdapterFactory.php.xml">
+        <totals>
+          <lines total="100" comments="37" code="63" executable="14" executed="10" percent="71.43"/>
+          <methods count="4" tested="1" percent="25.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="CodeceptionConfigParseException.php" href="CodeceptionConfigParseException.php.xml">
+        <totals>
+          <lines total="52" comments="31" code="21" executable="9" executed="0" percent="0.00"/>
+          <methods count="1" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="CommandLineBuilder.php" href="CommandLineBuilder.php.xml">
+        <totals>
+          <lines total="122" comments="58" code="64" executable="20" executed="16" percent="80.00"/>
+          <methods count="3" tested="1" percent="33.33"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="Stringifier.php" href="Stringifier.php.xml">
+        <totals>
+          <lines total="63" comments="37" code="26" executable="4" executed="3" percent="75.00"/>
+          <methods count="3" tested="2" percent="66.67"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+      <file name="VersionParser.php" href="VersionParser.php.xml">
+        <totals>
+          <lines total="58" comments="34" code="24" executable="5" executed="0" percent="0.00"/>
+          <methods count="1" tested="0" percent="0.00"/>
+          <functions count="0" tested="0" percent="0"/>
+          <classes count="1" tested="0" percent="0.00"/>
+          <traits count="0" tested="0" percent="0"/>
+        </totals>
+      </file>
+    </directory>
+  </project>
+</phpunit>

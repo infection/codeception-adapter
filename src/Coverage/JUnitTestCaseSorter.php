@@ -35,10 +35,12 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception\Coverage;
 
+use function array_map;
 use function assert;
 use function in_array;
-use Infection\AbstractTestFramework\Coverage\CoverageLineData;
+use Infection\AbstractTestFramework\Coverage\TestLocation;
 use function is_string;
+use function usort;
 
 /**
  * @internal
@@ -46,46 +48,49 @@ use function is_string;
 final class JUnitTestCaseSorter
 {
     /**
-     * @param CoverageLineData[] $coverageTestCases
+     * @param TestLocation[] $tests
      *
      * @return string[]
      */
-    public function getUniqueSortedFileNames(array $coverageTestCases): array
+    public function getUniqueSortedFileNames(array $tests): array
     {
-        $uniqueCoverageTests = $this->uniqueByTestFile($coverageTestCases);
+        $uniqueCoverageTests = $this->uniqueByTestFile($tests);
 
         // sort tests to run the fastest first
         usort(
             $uniqueCoverageTests,
-            static function (CoverageLineData $a, CoverageLineData $b): int {
-                return $a->time <=> $b->time;
+            static function (TestLocation $a, TestLocation $b): int {
+                return $a->getExecutionTime() <=> $b->getExecutionTime();
             }
         );
 
         return array_map(
-            static function (CoverageLineData $coverageLineData): string {
-                assert(is_string($coverageLineData->testFilePath));
+            static function (TestLocation $coverageLineData): string {
+                $filePath = $coverageLineData->getFilePath();
+                assert(is_string($filePath));
 
-                return $coverageLineData->testFilePath;
+                return $filePath;
             },
             $uniqueCoverageTests
         );
     }
 
     /**
-     * @param CoverageLineData[] $coverageTestCases
+     * @param TestLocation[] $tests
      *
-     * @return CoverageLineData[]
+     * @return TestLocation[]
      */
-    private function uniqueByTestFile(array $coverageTestCases): array
+    private function uniqueByTestFile(array $tests): array
     {
         $usedFileNames = [];
         $uniqueTests = [];
 
-        foreach ($coverageTestCases as $coverageTestCase) {
-            if (!in_array($coverageTestCase->testFilePath, $usedFileNames, true)) {
-                $uniqueTests[] = $coverageTestCase;
-                $usedFileNames[] = $coverageTestCase->testFilePath;
+        foreach ($tests as $test) {
+            $filePath = $test->getFilePath();
+
+            if (!in_array($filePath, $usedFileNames, true)) {
+                $uniqueTests[] = $test;
+                $usedFileNames[] = $filePath;
             }
         }
 
