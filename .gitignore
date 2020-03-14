@@ -3,4 +3,5 @@
 /.idea
 /.php_cs.cache
 /vendor/
-infection.log
+/infection.log
+/build/
