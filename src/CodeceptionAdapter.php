@@ -37,7 +37,7 @@ namespace Infection\TestFramework\Codeception;
 
 use function array_key_exists;
 use function assert;
-use Infection\AbstractTestFramework\Coverage\CoverageLineData;
+use Infection\AbstractTestFramework\Coverage\TestLocation;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\StreamWrapper\IncludeInterceptor;
@@ -176,12 +176,12 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     }
 
     /**
-     * @param CoverageLineData[] $coverageTests
+     * @param TestLocation[] $tests
      *
      * @return string[]
      */
     public function getMutantCommandLine(
-        array $coverageTests,
+        array $tests,
         string $mutatedFilePath,
         string $mutationHash,
         string $mutationOriginalFilePath,
@@ -201,7 +201,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
         file_put_contents($interceptorFilePath, $this->createCustomBootstrapWithInterceptor($mutationOriginalFilePath, $mutatedFilePath), LOCK_EX);
 
-        $uniqueTestFilePaths = implode(',', $this->jUnitTestCaseSorter->getUniqueSortedFileNames($coverageTests));
+        $uniqueTestFilePaths = implode(',', $this->jUnitTestCaseSorter->getUniqueSortedFileNames($tests));
 
         return array_merge(
             $commandLine,

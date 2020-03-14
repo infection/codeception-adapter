@@ -23,13 +23,11 @@
         ]
     },
     "config": {
-        "platform": {
-            "php": "7.2.9"
-        },
         "sort-packages": true
     },
     "require": {
-        "infection/abstract-testframework-adapter": "^0.2.3",
+        "php": "^7.3",
+        "infection/abstract-testframework-adapter": "^0.3.0",
         "infection/include-interceptor": "^0.2.0",
         "symfony/filesystem": "^3.4.29 || ^4.0 || ^5.0",
         "symfony/process": "^3.4.29 || ^4.0 || ^5.0",
