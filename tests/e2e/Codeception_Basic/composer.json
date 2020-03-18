@@ -13,6 +13,13 @@
         }
     },
     "require": {
-        "infection/infection": "^0.15.0"
-    }
+        "infection/infection": "dev-master",
+        "infection/codeception-adapter": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "codeception-package"
+        }
+    ]
 }

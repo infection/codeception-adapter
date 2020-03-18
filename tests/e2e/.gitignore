@@ -3,3 +3,4 @@ infection.log
 infection-cache/
 composer.lock
 error.log
+codeception-package
