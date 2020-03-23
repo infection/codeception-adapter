@@ -57,7 +57,6 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     public const NAME = 'codeception';
 
     private const DEFAULT_ARGS_AND_OPTIONS = [
-        'run',
         '--no-colors',
         '--fail-fast',
     ];
@@ -335,6 +334,7 @@ AUTOLOAD;
     private function prepareArgumentsAndOptions(string $extraOptions): array
     {
         return array_filter(array_merge(
+            ['run'],
             explode(' ', $extraOptions),
             self::DEFAULT_ARGS_AND_OPTIONS
         ));
