@@ -357,6 +357,24 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         self::assertSame('codeception', $this->createAdapter()->getName());
     }
 
+    public function test_prepare_arguments_and_options_contains_run_first(): void
+    {
+        $adapter = $this->createAdapter();
+
+        $commandLine = $adapter->getMutantCommandLine(
+            [],
+            self::MUTATED_FILE_PATH,
+            self::MUTATION_HASH,
+            self::ORIGINAL_FILE_PATH,
+            '--skip blah'
+        );
+
+        self::assertStringContainsString(
+            'path/to/codeception run --skip blah',
+            implode(' ', $commandLine)
+        );
+    }
+
     /**
      * @param array<string, mixed>|null $config
      */
