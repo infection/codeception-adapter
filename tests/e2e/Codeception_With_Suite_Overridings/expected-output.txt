@@ -1,6 +1,6 @@
-Total: 2
+Total: 5
 
-Killed: 2
+Killed: 5
 Errored: 0
 Escaped: 0
 Timed Out: 0

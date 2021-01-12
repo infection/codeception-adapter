@@ -32,9 +32,22 @@ then
     exit 0
 fi
 
+git_branch="${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
+
+if [ "$git_branch" == "master" ]; then
+  exit 0;
+fi;
+
+sed -i "s/\"infection\/codeception-adapter\": \"dev-master\"/\"infection\/codeception-adapter\": \"dev-${git_branch}\"/" composer.json
+
 set -e pipefail
 
+rm -f composer.lock
+composer install
+
 run "vendor/bin/infection"
+
+git checkout composer.json
 
 diff -w expected-output.txt infection.log
 

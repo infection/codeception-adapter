@@ -36,7 +36,6 @@ declare(strict_types=1);
 namespace Infection\Tests\TestFramework\Codeception;
 
 use Generator;
-use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\TestFramework\Codeception\CodeceptionAdapter;
 use Infection\TestFramework\Codeception\CommandLineBuilder;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
@@ -69,10 +68,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         ],
     ];
 
-    /**
-     * @var string
-     */
-    private $pathToProject;
+    private string $pathToProject;
 
     protected function setUp(): void
     {
@@ -96,13 +92,6 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $result = $adapter->testsPass($output);
 
         self::assertSame($expectedResult, $result);
-    }
-
-    public function test_it_conforms_to_memory_usage_aware(): void
-    {
-        $adapter = $this->createAdapter();
-
-        self::assertInstanceOf(MemoryUsageAware::class, $adapter);
     }
 
     /**

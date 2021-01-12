@@ -61,21 +61,25 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         '--fail-fast',
     ];
 
-    private $testFrameworkExecutable;
-    private $commandLineBuilder;
-    private $versionParser;
-    private $jUnitTestCaseSorter;
-    private $filesystem;
-    private $jUnitFilePath;
-    private $tmpDir;
-    private $projectDir;
-    private $originalConfigContentParsed;
-    private $srcDirs;
+    private string $testFrameworkExecutable;
+    private CommandLineBuilder $commandLineBuilder;
+    private VersionParser $versionParser;
+    private JUnitTestCaseSorter $jUnitTestCaseSorter;
+    private Filesystem $filesystem;
+    private string $jUnitFilePath;
+    private string $tmpDir;
+    private string $projectDir;
 
     /**
-     * @var string|null
+     * @var array<string, mixed>
      */
-    private $cachedVersion;
+    private array $originalConfigContentParsed;
+
+    /**
+     * @var string[]
+     */
+    private array $srcDirs;
+    private ?string $cachedVersion = null;
 
     /**
      * @param array<string, mixed> $originalConfigContentParsed
@@ -175,12 +179,12 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     }
 
     /**
-     * @param TestLocation[] $tests
+     * @param TestLocation[] $coverageTests
      *
      * @return string[]
      */
     public function getMutantCommandLine(
-        array $tests,
+        array $coverageTests,
         string $mutatedFilePath,
         string $mutationHash,
         string $mutationOriginalFilePath,
@@ -200,7 +204,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
         file_put_contents($interceptorFilePath, $this->createCustomBootstrapWithInterceptor($mutationOriginalFilePath, $mutatedFilePath), LOCK_EX);
 
-        $uniqueTestFilePaths = implode(',', $this->jUnitTestCaseSorter->getUniqueSortedFileNames($tests));
+        $uniqueTestFilePaths = implode(',', $this->jUnitTestCaseSorter->getUniqueSortedFileNames($coverageTests));
 
         return array_merge(
             $commandLine,
@@ -236,15 +240,13 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         $process = new Process($testFrameworkVersionExecutable);
         $process->mustRun();
 
-        $version = 'unknown';
-
         try {
             $version = $this->versionParser->parse($process->getOutput());
         } catch (InvalidArgumentException $e) {
             $version = 'unknown';
-        } finally {
-            $this->cachedVersion = $version;
         }
+
+        $this->cachedVersion = $version;
 
         return $this->cachedVersion;
     }
@@ -254,7 +256,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         return sprintf('Check the executed command to identify the problem: %s', $commandLine);
     }
 
-    protected function getInterceptorFileContent(string $interceptorPath, string $originalFilePath, string $mutatedFilePath): string
+    private function getInterceptorFileContent(string $interceptorPath, string $originalFilePath, string $mutatedFilePath): string
     {
         $infectionPhar = '';
 
@@ -352,7 +354,7 @@ AUTOLOAD;
         $includedFiles = array_key_exists('include', $coverage)
             ? $coverage['include']
             : array_map(
-                static function ($dir): string {
+                static function (string $dir): string {
                     return trim($dir, '/') . '/*.php';
                 },
                 $this->srcDirs
