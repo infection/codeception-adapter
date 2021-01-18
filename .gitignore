@@ -2,6 +2,6 @@
 /.composer/
 /.idea
 /.php_cs.cache
-/vendor/
-/infection.log
 /build/
+/infection.log
+/vendor/

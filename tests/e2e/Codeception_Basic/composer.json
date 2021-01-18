@@ -13,7 +13,7 @@
         }
     },
     "require": {
-        "infection/infection": "dev-master",
+        "infection/infection": "0.18.2",
         "infection/codeception-adapter": "dev-master"
     },
     "repositories": [
