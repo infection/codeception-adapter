@@ -1,0 +1,16 @@
+*.php text eol=lf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+
+# Directories and files we do not want to distribute
+/.*                     export-ignore
+/build/                 export-ignore
+/docs/                  export-ignore
+/infection.json.dist    export-ignore
+/tests/                 export-ignore
+/phpstan-baseline.neon  export-ignore
+/phpunit.xml.dist       export-ignore
+/psalm.xml              export-ignore
+/psalm-baseline.xml     export-ignore
