@@ -30,7 +30,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
-          tools: composer:v2
+          tools: composer:v1
 
       - name: Get composer cache directory
         id: composer-cache
@@ -49,7 +49,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install --no-interaction --no-progress --no-suggest --prefer-dist
+          composer install --no-interaction --no-progress --prefer-dist
 
       - name: Run ${{ matrix.check }}
         run: make ${{ matrix.check }}
