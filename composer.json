@@ -41,7 +41,7 @@
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
         "infection/infection": "^0.15.2",
-        "php-coveralls/php-coveralls": "^2.2",
+        "php-coveralls/php-coveralls": "^2.4",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.10",
         "phpstan/phpstan-phpunit": "^0.12.6",
