@@ -50,4 +50,3 @@ run "vendor/bin/infection"
 git checkout composer.json
 
 diff -w expected-output.txt infection.log
-
