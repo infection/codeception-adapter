@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="3.8.5@e6ec5fa22a7b9e61670a24d07b3119aff80dcd89">
+<files psalm-version="4.4.1@9fd7a7d885b3a216cff8dec9d8c21a132f275224">
   <file src="src/CodeceptionAdapter.php">
     <MixedArgument occurrences="5">
+      <code>$includedFiles</code>
       <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
-      <code>$this-&gt;originalConfigContentParsed['paths']['tests'] ?? 'tests'</code>
       <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
       <code>$this-&gt;originalConfigContentParsed['coverage'] ?? []</code>
-      <code>$includedFiles</code>
+      <code>$this-&gt;originalConfigContentParsed['paths']['tests'] ?? 'tests'</code>
     </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$includedFiles</code>
@@ -19,9 +19,6 @@
     </MixedReturnStatement>
   </file>
   <file src="src/CodeceptionAdapterFactory.php">
-    <MixedArgument occurrences="1">
-      <code>\Codeception\Codecept::VERSION</code>
-    </MixedArgument>
     <MixedAssignment occurrences="1">
       <code>$codeceptionConfigContentParsed</code>
     </MixedAssignment>
@@ -34,14 +31,13 @@
     <MoreSpecificImplementedParamType occurrences="1">
       <code>$sourceDirectories</code>
     </MoreSpecificImplementedParamType>
-    <UndefinedClass occurrences="2">
-      <code>\Codeception\Codecept</code>
-      <code>\Codeception\Codecept</code>
-    </UndefinedClass>
   </file>
   <file src="src/CommandLineBuilder.php">
     <ForbiddenCode occurrences="1">
-      <code>`command -v php`</code>
+      <code>shell_exec('command -v php')</code>
     </ForbiddenCode>
+    <UndefinedClass occurrences="1">
+      <code>FinderException</code>
+    </UndefinedClass>
   </file>
 </files>

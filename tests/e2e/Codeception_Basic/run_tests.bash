@@ -18,22 +18,15 @@ run () {
     fi
 }
 
-
 cd "$(dirname "$0")"
 
-rm -rf codeception-package
-mkdir codeception-package
-
-git_branch="$(git rev-parse --abbrev-ref HEAD)"
+git_branch="${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
 
 if [ "$git_branch" == "master" ]; then
   exit 0;
 fi;
 
-sed -i "s/\"infection\/codeception-adapter\": \"dev-master\"/\"infection\/codeception-adapter\": \"dev-master#${git_branch}\"/" composer.json
-
-cp -r ../../../src codeception-package/src
-cp ../../../composer.json codeception-package
+sed -i "s/\"infection\/codeception-adapter\": \"dev-master\"/\"infection\/codeception-adapter\": \"dev-${git_branch}\"/" composer.json
 
 set -e pipefail
 

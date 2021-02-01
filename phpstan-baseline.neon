@@ -6,14 +6,14 @@ parameters:
 			path: src/CodeceptionAdapterFactory.php
 
 		-
-			message: "#^Call to static method Webmozart\\\\Assert\\\\Assert\\:\\:allString\\(\\) with array\\<string\\> will always evaluate to true\\.$#"
+			message: "#^Call to static method phpExecutableNotFound\\(\\) on an unknown class Infection\\\\Finder\\\\Exception\\\\FinderException\\.$#"
 			count: 1
-			path: src/Stringifier.php
+			path: src/CommandLineBuilder.php
 
 		-
-			message: "#^Call to static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) with 'Infection…' and Infection\\\\TestFramework\\\\Codeception\\\\CodeceptionAdapter will always evaluate to true\\.$#"
+			message: "#^Call to static method Webmozart\\\\Assert\\\\Mixin\\:\\:allString\\(\\) with array\\<string\\> will always evaluate to true\\.$#"
 			count: 1
-			path: tests/phpunit/CodeceptionAdapterTest.php
+			path: src/Stringifier.php
 
 		-
 			message: "#^Parameter \\#1 \\$arrayOfStrings of static method Infection\\\\TestFramework\\\\Codeception\\\\Stringifier\\:\\:stringifyArray\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
