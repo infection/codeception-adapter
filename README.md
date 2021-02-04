@@ -1,4 +1,4 @@
-[![Continuous Integration](https://github.com/infection/codeception-adapter/workflows/Continuous%20Integration/badge.svg)](https://github.com/infection/codeception-adapter)
+[![CI](https://github.com/infection/codeception-adapter/workflows/Tests/badge.svg?branch=master)](https://github.com/infection/codeception-adapter)
 [![Coverage Status](https://coveralls.io/repos/github/infection/codeception-adapter/badge.svg?branch=master)](https://coveralls.io/github/infection/codeception-adapter?branch=master)
 
 # Codeception Test Framework Adapter for Infection
