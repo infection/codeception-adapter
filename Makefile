@@ -28,7 +28,8 @@ PSALM_ARGS=--show-info=false
 COMPOSER=$(PHP) $(shell which composer)
 
 # Infection
-INFECTION=vendor/bin/infection
+INFECTION=./.tools/infection.phar
+INFECTION_URL="https://github.com/infection/infection/releases/download/0.24.0/infection.phar"
 MIN_MSI=52.212389380531
 MIN_COVERED_MSI=95
 INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress
@@ -37,7 +38,7 @@ all: test
 
 cs:
 	$(PHP_CS_FIXER) fix $(PHP_CS_FIXER_ARGS) --dry-run
-	LC_ALL=C sort -c -u .gitignore
+	LC_ALL=C sort -u .gitignore -o .gitignore
 
 phpstan:
 	$(PHPSTAN) $(PHPSTAN_ARGS) --no-progress
@@ -50,10 +51,10 @@ static-analyze: phpstan psalm
 test-unit:
 	$(PHPUNIT) $(PHPUNIT_ARGS)
 
-test-e2e:
+test-e2e: $(INFECTION)
 	tests/e2e_tests
 
-infection:
+infection: $(INFECTION)
 	$(INFECTION) $(INFECTION_ARGS)
 
 ##############################################################
@@ -92,7 +93,6 @@ prerequisites: build/cache vendor/autoload.php composer.lock infection.json.dist
 # Do install if there's no 'vendor'
 vendor/autoload.php:
 	$(COMPOSER) install --prefer-dist
-	test -d vendor/infection/infection/src/StreamWrapper/ && rm -fr vendor/infection/infection/src/StreamWrapper/ && $(COMPOSER) dump-autoload || true
 
 # If composer.lock is older than `composer.json`, do update,
 # and touch composer.lock because composer not always does that
@@ -101,3 +101,8 @@ composer.lock: composer.json
 
 build/cache:
 	mkdir -p build/cache
+
+$(INFECTION): Makefile
+	wget -q $(INFECTION_URL) --output-document=$(INFECTION)
+	chmod a+x $(INFECTION)
+	touch $@

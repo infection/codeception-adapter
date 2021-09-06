@@ -1,7 +1,9 @@
+!/.tools/.gitkeep
 .phpunit.result.cache
 /.composer/
 /.idea
 /.php_cs.cache
+/.tools/
 /build/
 /infection.log
 /vendor/

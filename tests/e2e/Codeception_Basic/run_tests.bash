@@ -33,7 +33,7 @@ set -e pipefail
 rm -f composer.lock
 composer install
 
-run "vendor/bin/infection"
+run "/.tools/infection.phar"
 
 git checkout composer.json
 
