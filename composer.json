@@ -27,7 +27,7 @@
     },
     "require": {
         "php": "^7.4 || ^8.0",
-        "infection/abstract-testframework-adapter": "^0.3.1",
+        "infection/abstract-testframework-adapter": "^0.5.0",
         "infection/include-interceptor": "^0.2.0",
         "symfony/filesystem": "^3.4.29 || ^4.0 || ^5.0",
         "symfony/process": "^3.4.29 || ^4.0 || ^5.0",
@@ -40,7 +40,6 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.18",
-        "infection/infection": "^0.21.0",
         "php-coveralls/php-coveralls": "^2.4",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12.70",

@@ -20,7 +20,9 @@ run () {
 
 cd "$(dirname "$0")"
 
-git_branch="${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}"
+git_branch=$(echo "${GITHUB_HEAD_REF:-$(git rev-parse --abbrev-ref HEAD)}" | sed 's/\//\\\//g')
+
+echo "git_branch: ${git_branch}"
 
 if [ "$git_branch" == "master" ]; then
   exit 0;

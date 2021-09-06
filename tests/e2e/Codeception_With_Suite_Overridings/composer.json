@@ -2,7 +2,7 @@
     "require-dev": {
         "codeception/codeception": "^4.1.9",
         "codeception/module-db": "^1.1",
-        "infection/infection": "0.21.0",
+        "infection/infection": "0.25.0",
         "infection/codeception-adapter": "dev-master"
     },
     "autoload": {
