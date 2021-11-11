@@ -57,6 +57,6 @@ final class CodeceptionAdapterFactoryTest extends TestCase
             true
         );
 
-        self::assertInstanceOf(CodeceptionAdapter::class, $adapter);
+        $this->assertInstanceOf(CodeceptionAdapter::class, $adapter);
     }
 }

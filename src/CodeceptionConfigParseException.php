@@ -36,6 +36,7 @@ declare(strict_types=1);
 namespace Infection\TestFramework\Codeception;
 
 use Exception;
+use function sprintf;
 
 final class CodeceptionConfigParseException extends Exception
 {

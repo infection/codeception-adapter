@@ -47,7 +47,7 @@ final class StringifierTest extends TestCase
      */
     public function test_stringify_boolean(bool $boolean, string $expectedStringBoolean): void
     {
-        self::assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
+        $this->assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
     }
 
     /**
@@ -57,7 +57,7 @@ final class StringifierTest extends TestCase
      */
     public function test_stringify_array_of_strings(array $arrayOfStrings, string $expectedStringArray): void
     {
-        self::assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
+        $this->assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
     }
 
     public function test_stringify_array_of_strings_works_only_with_array_of_strings(): void

@@ -35,8 +35,13 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception;
 
+use function array_filter;
+use function array_merge;
 use Infection\Finder\Exception\FinderException;
+use function is_executable;
 use const PHP_SAPI;
+use function shell_exec;
+use function substr;
 use Symfony\Component\Process\PhpExecutableFinder;
 
 /**

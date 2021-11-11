@@ -2,7 +2,7 @@
 .phpunit.result.cache
 /.composer/
 /.idea
-/.php_cs.cache
+/.php-cs-fixer.cache
 /.tools/
 /build/
 /infection.log
