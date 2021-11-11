@@ -21,9 +21,9 @@ jobs:
         php-version: ['7.4', '8.0', '8.1']
         coverage-driver: [pcov]
         symfony-require: ['^4', '^5', '^6']
-          exclude:
-            - symfony-require: "^6"
-              php-version: "7.4"
+        exclude:
+          - symfony-require: "^6"
+            php-version: "7.4"
 
     name: CI with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}, with Symfony ${{ matrix.symfony-require }}
 
