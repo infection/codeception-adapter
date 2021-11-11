@@ -4,3 +4,5 @@ includes:
 parameters:
     level: max
     inferPrivatePropertyTypeFromConstructor: true
+    ignoreErrors:
+        - '#Dynamic call to static method PHPUnit\\Framework\\.*::.*#'
