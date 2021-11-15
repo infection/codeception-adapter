@@ -29,8 +29,8 @@ COMPOSER=$(PHP) $(shell which composer)
 # Infection
 INFECTION=./.tools/infection.phar
 INFECTION_URL="https://github.com/infection/infection/releases/download/0.24.0/infection.phar"
-MIN_MSI=78
-MIN_COVERED_MSI=98
+MIN_MSI=87
+MIN_COVERED_MSI=99
 INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress --show-mutations
 
 all: test
