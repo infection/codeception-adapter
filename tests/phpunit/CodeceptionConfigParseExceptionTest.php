@@ -35,55 +35,26 @@ declare(strict_types=1);
 
 namespace Infection\Tests\TestFramework\Codeception;
 
-use Infection\TestFramework\Codeception\CodeceptionAdapter;
-use Infection\TestFramework\Codeception\CodeceptionAdapterFactory;
 use Infection\TestFramework\Codeception\CodeceptionConfigParseException;
 use PHPUnit\Framework\TestCase;
+use function sprintf;
+use Symfony\Component\Yaml\Exception\ParseException;
 
-/**
- * @group integration Requires some I/O operations
- */
-final class CodeceptionAdapterFactoryTest extends TestCase
+final class CodeceptionConfigParseExceptionTest extends TestCase
 {
-    public function test_it_creates_codeception_adapter(): void
+    public function test_from_path_message(): void
     {
-        $adapter = CodeceptionAdapterFactory::create(
-            '/path/to/codecept',
-            '/tmp',
-            __DIR__ . '/Fixtures/Files/codeception/codeception.yml',
-            null,
-            '/path/to/junit.xml',
-            '/path/to/project',
-            [],
-            true
-        );
+        $originalException = new ParseException('Yaml invalid');
 
-        $this->assertInstanceOf(CodeceptionAdapter::class, $adapter);
-    }
+        $exception = CodeceptionConfigParseException::fromPath('/path', $originalException);
 
-    public function test_it_returns_right_adapter_name(): void
-    {
-        $this->assertSame(CodeceptionAdapter::NAME, CodeceptionAdapterFactory::getAdapterName());
-    }
-
-    public function test_it_returns_right_executable_name(): void
-    {
-        $this->assertSame('codecept', CodeceptionAdapterFactory::getExecutableName());
-    }
-
-    public function test_it_throws_an_exception_when_yaml_can_not_be_parsed(): void
-    {
-        $this->expectException(CodeceptionConfigParseException::class);
-
-        CodeceptionAdapterFactory::create(
-            '/path/to/codecept',
-            '/tmp',
-            __DIR__ . '/Fixtures/Files/codeception/invalid_codeception.yml',
-            null,
-            '/path/to/junit.xml',
-            '/path/to/project',
-            [],
-            true
+        $this->assertSame(
+            sprintf(
+                "Error loading Yaml config from '%s'\n \n%s",
+                '/path',
+                $originalException->getMessage()
+            ),
+            $exception->getMessage()
         );
     }
 }
