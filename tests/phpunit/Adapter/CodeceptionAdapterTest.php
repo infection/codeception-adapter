@@ -33,7 +33,7 @@
 
 declare(strict_types=1);
 
-namespace Infection\Tests\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
 use function array_merge;
 use function file_get_contents;

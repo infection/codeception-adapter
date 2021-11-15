@@ -18,5 +18,5 @@ parameters:
 		-
 			message: "#^Parameter \\#1 \\$arrayOfStrings of static method Infection\\\\TestFramework\\\\Codeception\\\\Stringifier\\:\\:stringifyArray\\(\\) expects array\\<string\\>, array\\<int, int\\> given\\.$#"
 			count: 1
-			path: tests/phpunit/StringifierTest.php
+			path: tests/phpunit/Adapter/StringifierTest.php
 

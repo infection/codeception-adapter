@@ -33,28 +33,61 @@
 
 declare(strict_types=1);
 
-namespace Infection\Tests\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
-use Infection\TestFramework\Codeception\CodeceptionConfigParseException;
+use Generator;
+use Infection\TestFramework\Codeception\Stringifier;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use function sprintf;
-use Symfony\Component\Yaml\Exception\ParseException;
 
-final class CodeceptionConfigParseExceptionTest extends TestCase
+final class StringifierTest extends TestCase
 {
-    public function test_from_path_message(): void
+    /**
+     * @dataProvider provideBooleanStrings
+     */
+    public function test_stringify_boolean(bool $boolean, string $expectedStringBoolean): void
     {
-        $originalException = new ParseException('Yaml invalid');
+        $this->assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
+    }
 
-        $exception = CodeceptionConfigParseException::fromPath('/path', $originalException);
+    /**
+     * @dataProvider provideArrayOfStrings
+     *
+     * @param string[] $arrayOfStrings
+     */
+    public function test_stringify_array_of_strings(array $arrayOfStrings, string $expectedStringArray): void
+    {
+        $this->assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
+    }
 
-        $this->assertSame(
-            sprintf(
-                "Error loading Yaml config from '%s'\n \n%s",
-                '/path',
-                $originalException->getMessage()
-            ),
-            $exception->getMessage()
-        );
+    public function test_stringify_array_of_strings_works_only_with_array_of_strings(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $arrayOfInts = [1, 2, 3];
+
+        Stringifier::stringifyArray($arrayOfInts);
+    }
+
+    /**
+     * @return Generator<string, array{0: bool, 1: string}>
+     */
+    public function provideBooleanStrings(): Generator
+    {
+        yield 'True' => [true, 'true'];
+
+        yield 'False' => [false, 'false'];
+    }
+
+    /**
+     * @return Generator<string, array{0: string[], 1: string}>
+     */
+    public function provideArrayOfStrings(): Generator
+    {
+        yield 'Empty array' => [[], '[]'];
+
+        yield 'One element' => [['/path/to/first'], '[/path/to/first]'];
+
+        yield 'Several elements' => [['/path/to/first', '/second'], '[/path/to/first,/second]'];
     }
 }
