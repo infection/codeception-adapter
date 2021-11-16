@@ -33,10 +33,11 @@
 
 declare(strict_types=1);
 
-namespace Infection\Tests\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
 use Infection\TestFramework\Codeception\CodeceptionAdapter;
 use Infection\TestFramework\Codeception\CodeceptionAdapterFactory;
+use Infection\TestFramework\Codeception\CodeceptionConfigParseException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -49,7 +50,7 @@ final class CodeceptionAdapterFactoryTest extends TestCase
         $adapter = CodeceptionAdapterFactory::create(
             '/path/to/codecept',
             '/tmp',
-            __DIR__ . '/Fixtures/Files/codeception/codeception.yml',
+            __DIR__ . '/../Fixtures/Files/codeception/codeception.yml',
             null,
             '/path/to/junit.xml',
             '/path/to/project',
@@ -57,6 +58,32 @@ final class CodeceptionAdapterFactoryTest extends TestCase
             true
         );
 
-        self::assertInstanceOf(CodeceptionAdapter::class, $adapter);
+        $this->assertInstanceOf(CodeceptionAdapter::class, $adapter);
+    }
+
+    public function test_it_returns_right_adapter_name(): void
+    {
+        $this->assertSame(CodeceptionAdapter::NAME, CodeceptionAdapterFactory::getAdapterName());
+    }
+
+    public function test_it_returns_right_executable_name(): void
+    {
+        $this->assertSame('codecept', CodeceptionAdapterFactory::getExecutableName());
+    }
+
+    public function test_it_throws_an_exception_when_yaml_can_not_be_parsed(): void
+    {
+        $this->expectException(CodeceptionConfigParseException::class);
+
+        CodeceptionAdapterFactory::create(
+            '/path/to/codecept',
+            '/tmp',
+            __DIR__ . '/../Fixtures/Files/codeception/invalid_codeception.yml',
+            null,
+            '/path/to/junit.xml',
+            '/path/to/project',
+            [],
+            true
+        );
     }
 }

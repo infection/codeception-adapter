@@ -33,21 +33,61 @@
 
 declare(strict_types=1);
 
-namespace Infection\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
-use Exception;
-use function sprintf;
+use Generator;
+use Infection\TestFramework\Codeception\Stringifier;
+use InvalidArgumentException;
+use PHPUnit\Framework\TestCase;
 
-final class CodeceptionConfigParseException extends Exception
+final class StringifierTest extends TestCase
 {
-    public static function fromPath(string $configPath, Exception $originalException): self
+    /**
+     * @dataProvider provideBooleanStrings
+     */
+    public function test_stringify_boolean(bool $boolean, string $expectedStringBoolean): void
     {
-        return new self(
-            sprintf(
-                "Error loading Yaml config from '%s'\n \n%s",
-                $configPath,
-                $originalException->getMessage()
-            )
-        );
+        $this->assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
+    }
+
+    /**
+     * @dataProvider provideArrayOfStrings
+     *
+     * @param string[] $arrayOfStrings
+     */
+    public function test_stringify_array_of_strings(array $arrayOfStrings, string $expectedStringArray): void
+    {
+        $this->assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
+    }
+
+    public function test_stringify_array_of_strings_works_only_with_array_of_strings(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+
+        $arrayOfInts = [1, 2, 3];
+
+        Stringifier::stringifyArray($arrayOfInts);
+    }
+
+    /**
+     * @return Generator<string, array{0: bool, 1: string}>
+     */
+    public function provideBooleanStrings(): Generator
+    {
+        yield 'True' => [true, 'true'];
+
+        yield 'False' => [false, 'false'];
+    }
+
+    /**
+     * @return Generator<string, array{0: string[], 1: string}>
+     */
+    public function provideArrayOfStrings(): Generator
+    {
+        yield 'Empty array' => [[], '[]'];
+
+        yield 'One element' => [['/path/to/first'], '[/path/to/first]'];
+
+        yield 'Several elements' => [['/path/to/first', '/second'], '[/path/to/first,/second]'];
     }
 }

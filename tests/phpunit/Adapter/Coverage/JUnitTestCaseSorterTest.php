@@ -33,61 +33,30 @@
 
 declare(strict_types=1);
 
-namespace Infection\Tests\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter\Coverage;
 
-use Generator;
-use Infection\TestFramework\Codeception\Stringifier;
-use InvalidArgumentException;
+use Infection\AbstractTestFramework\Coverage\TestLocation;
+use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use PHPUnit\Framework\TestCase;
 
-final class StringifierTest extends TestCase
+final class JUnitTestCaseSorterTest extends TestCase
 {
-    /**
-     * @dataProvider provideBooleanStrings
-     */
-    public function test_stringify_boolean(bool $boolean, string $expectedStringBoolean): void
+    public function test_it_sorts_unique_file_names(): void
     {
-        self::assertSame($expectedStringBoolean, Stringifier::stringifyBoolean($boolean));
-    }
+        $tests = [
+            new TestLocation('test', '/path/test.php', 12),
+            new TestLocation('build', '/path/build.php', 8),
+            new TestLocation('execute', '/path/test.php', 11),
+        ];
 
-    /**
-     * @dataProvider provideArrayOfStrings
-     *
-     * @param string[] $arrayOfStrings
-     */
-    public function test_stringify_array_of_strings(array $arrayOfStrings, string $expectedStringArray): void
-    {
-        self::assertSame($expectedStringArray, Stringifier::stringifyArray($arrayOfStrings));
-    }
+        $sorter = new JUnitTestCaseSorter();
 
-    public function test_stringify_array_of_strings_works_only_with_array_of_strings(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $arrayOfInts = [1, 2, 3];
-
-        Stringifier::stringifyArray($arrayOfInts);
-    }
-
-    /**
-     * @return Generator<string, array{0: bool, 1: string}>
-     */
-    public function provideBooleanStrings(): Generator
-    {
-        yield 'True' => [true, 'true'];
-
-        yield 'False' => [false, 'false'];
-    }
-
-    /**
-     * @return Generator<string, array{0: string[], 1: string}>
-     */
-    public function provideArrayOfStrings(): Generator
-    {
-        yield 'Empty array' => [[], '[]'];
-
-        yield 'One element' => [['/path/to/first'], '[/path/to/first]'];
-
-        yield 'Several elements' => [['/path/to/first', '/second'], '[/path/to/first,/second]'];
+        $this->assertSame(
+            [
+                '/path/build.php',
+                '/path/test.php',
+            ],
+            $sorter->getUniqueSortedFileNames($tests)
+        );
     }
 }

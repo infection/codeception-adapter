@@ -33,21 +33,28 @@
 
 declare(strict_types=1);
 
-namespace Infection\TestFramework\Codeception;
+namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
-use Exception;
+use Infection\TestFramework\Codeception\CodeceptionConfigParseException;
+use PHPUnit\Framework\TestCase;
 use function sprintf;
+use Symfony\Component\Yaml\Exception\ParseException;
 
-final class CodeceptionConfigParseException extends Exception
+final class CodeceptionConfigParseExceptionTest extends TestCase
 {
-    public static function fromPath(string $configPath, Exception $originalException): self
+    public function test_from_path_message(): void
     {
-        return new self(
+        $originalException = new ParseException('Yaml invalid');
+
+        $exception = CodeceptionConfigParseException::fromPath('/path', $originalException);
+
+        $this->assertSame(
             sprintf(
                 "Error loading Yaml config from '%s'\n \n%s",
-                $configPath,
+                '/path',
                 $originalException->getMessage()
-            )
+            ),
+            $exception->getMessage()
         );
     }
 }

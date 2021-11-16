@@ -7,9 +7,8 @@ PHP=$(shell which php)
 JOBS=$(shell nproc)
 
 # PHP CS Fixer
-PHP_CS_FIXER=vendor/bin/php-cs-fixer
-PHP_CS_FIXER_ARGS=--diff --diff-format=udiff --verbose
-export PHP_CS_FIXER_IGNORE_ENV=1
+PHP_CS_FIXER=./.tools/php-cs-fixer
+PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.2.1/php-cs-fixer.phar"
 
 # PHPUnit
 PHPUNIT=vendor/bin/phpunit
@@ -30,14 +29,14 @@ COMPOSER=$(PHP) $(shell which composer)
 # Infection
 INFECTION=./.tools/infection.phar
 INFECTION_URL="https://github.com/infection/infection/releases/download/0.24.0/infection.phar"
-MIN_MSI=78
-MIN_COVERED_MSI=98
-INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress
+MIN_MSI=87
+MIN_COVERED_MSI=99
+INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress --show-mutations
 
 all: test
 
-cs:
-	$(PHP_CS_FIXER) fix $(PHP_CS_FIXER_ARGS) --dry-run
+cs: $(PHP_CS_FIXER)
+	$(PHP_CS_FIXER) fix -v --diff --dry-run
 	LC_ALL=C sort -u .gitignore -o .gitignore
 
 phpstan:
@@ -79,7 +78,7 @@ analyze: cs-fix
 	$(PSALM) $(PSALM_ARGS)
 
 cs-fix: test-prerequisites
-	$(PHP_CS_FIXER) fix $(PHP_CS_FIXER_ARGS)
+	$(PHP_CS_FIXER) fix -v --diff
 	LC_ALL=C sort -u .gitignore -o .gitignore
 
 ##############################################################
@@ -105,4 +104,9 @@ build/cache:
 $(INFECTION): Makefile
 	wget -q $(INFECTION_URL) --output-document=$(INFECTION)
 	chmod a+x $(INFECTION)
+	touch $@
+
+$(PHP_CS_FIXER): Makefile
+	wget -q $(PHP_CS_FIXER_URL) --output-document=$(PHP_CS_FIXER)
+	chmod a+x $(PHP_CS_FIXER)
 	touch $@

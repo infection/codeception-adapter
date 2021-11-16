@@ -35,8 +35,13 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception;
 
+use function array_filter;
 use function array_key_exists;
+use function array_map;
+use function array_merge;
 use function assert;
+use function explode;
+use function implode;
 use Infection\AbstractTestFramework\Coverage\TestLocation;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
@@ -44,11 +49,19 @@ use Infection\StreamWrapper\IncludeInterceptor;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use InvalidArgumentException;
 use function is_string;
+use const LOCK_EX;
 use Phar;
+use function preg_match;
 use ReflectionClass;
 use function Safe\file_put_contents;
+use function sprintf;
+use function str_replace;
+use function strlen;
+use function strpos;
+use function strstr;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
+use function trim;
 
 final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
