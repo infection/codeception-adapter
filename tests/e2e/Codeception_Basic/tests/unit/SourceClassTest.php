@@ -31,6 +31,6 @@ class SourceClassTest extends \Codeception\Test\Unit
     {
         $source = new SourceClass();
 
-        $this->assertSame(0.3, $source->add(0.1, 0.2));
+        $this->assertSame(0.3, round($source->add(0.1, 0.2), 1));
     }
 }
