@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "infection/infection": "0.26.6",
+        "infection/infection": "0.25.0",
         "infection/codeception-adapter": "dev-master"
     },
     "config": {
