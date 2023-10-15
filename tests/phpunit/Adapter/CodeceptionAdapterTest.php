@@ -112,7 +112,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     /**
      * @return Generator<int, array{0: string, 1: float}>
      */
-    public function memoryReportProvider(): Generator
+    public static function memoryReportProvider(): Generator
     {
         yield ['Memory: 8.00MB', 8.0];
 
@@ -126,7 +126,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     /**
      * @return Generator<int, array{0: string, 1: bool}>
      */
-    public function passProvider(): Generator
+    public static function passProvider(): Generator
     {
         yield ['OK, but incomplete, skipped, or risky tests!', true];
 
@@ -135,6 +135,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         yield ['FAILURES!', false];
 
         yield ['ERRORS!', false];
+
+        yield ['unhandled string', false];
     }
 
     public function test_it_sets_coverage_phpunit_dir(): void
