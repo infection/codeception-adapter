@@ -1,0 +1,38 @@
+# yamllint disable rule:line-length
+# yamllint disable rule:braces
+
+name: E2E Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version: [ '7.4', '8.0', '8.1' ]
+        coverage-driver: [ pcov ]
+
+    name: CI with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-version }}
+          coverage: ${{ matrix.coverage-driver }}
+          tools: composer:v2
+
+      - name: Run E2E tests
+        env:
+          TERM: xterm-256color
+        run: make test-e2e
