@@ -36,11 +36,11 @@ declare(strict_types=1);
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
-$header = trim(sprintf(
+$header = \trim(\sprintf(
     'This code is licensed under the BSD 3-Clause License.%s',
-    substr(
-        file_get_contents('LICENSE'),
-        strlen('BSD 3-Clause License')
+    \substr(
+        \file_get_contents('LICENSE'),
+        \strlen('BSD 3-Clause License')
     )
 ));
 
@@ -85,7 +85,8 @@ return (new Config())
                 'yield',
             ],
         ],
-        'compact_nullable_typehint' => true,
+        'blank_line_between_import_groups' => false,
+        'compact_nullable_type_declaration' => true,
         'concat_space' => ['spacing' => 'one'],
         'fully_qualified_strict_types' => true,
         'global_namespace_import' => [

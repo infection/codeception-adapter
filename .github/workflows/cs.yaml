@@ -16,15 +16,15 @@ jobs:
 
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
-        php-version: ['7.4']
-        check: ['cs', 'static-analyze']
+        operating-system: [ ubuntu-latest ]
+        php-version: [ '8.0' ]
+        check: [ 'cs', 'static-analyze' ]
 
     name: Coding Standards on PHP ${{ matrix.php-version }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2

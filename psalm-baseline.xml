@@ -1,48 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.12.0@e42bc4a23f67acba28a23bb09c348e2ff38a1d87">
-  <file src="src/CodeceptionAdapter.php">
-    <MixedArgument occurrences="5">
-      <code>$includedFiles</code>
-      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
-      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
-      <code>$this-&gt;originalConfigContentParsed['coverage'] ?? []</code>
-      <code>$this-&gt;originalConfigContentParsed['paths']['tests'] ?? 'tests'</code>
-    </MixedArgument>
-    <MixedAssignment occurrences="1">
-      <code>$includedFiles</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>?string</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$this-&gt;originalConfigContentParsed['bootstrap']</code>
-    </MixedReturnStatement>
-  </file>
+<files psalm-version="5.15.0@5c774aca4746caf3d239d9c8cadb9f882ca29352">
   <file src="src/CodeceptionAdapterFactory.php">
-    <MixedAssignment occurrences="1">
-      <code>$codeceptionConfigContentParsed</code>
-    </MixedAssignment>
-    <MixedInferredReturnType occurrences="1">
-      <code>array&lt;string, mixed&gt;</code>
-    </MixedInferredReturnType>
-    <MixedReturnStatement occurrences="1">
-      <code>$codeceptionConfigContentParsed</code>
-    </MixedReturnStatement>
-    <MoreSpecificImplementedParamType occurrences="1">
+    <MoreSpecificImplementedParamType>
       <code>$sourceDirectories</code>
     </MoreSpecificImplementedParamType>
   </file>
   <file src="src/CommandLineBuilder.php">
-    <ForbiddenCode occurrences="1">
-      <code>shell_exec('command -v php')</code>
+    <ForbiddenCode>
+      <code><![CDATA[shell_exec('command -v php')]]></code>
     </ForbiddenCode>
-    <UndefinedClass occurrences="1">
+    <UndefinedClass>
       <code>FinderException</code>
     </UndefinedClass>
-  </file>
-  <file src="src/Stringifier.php">
-    <UnusedMethodCall occurrences="1">
-      <code>allString</code>
-    </UnusedMethodCall>
   </file>
 </files>

@@ -56,8 +56,8 @@ use ReflectionClass;
 use function Safe\file_put_contents;
 use function sprintf;
 use function str_replace;
+use function str_starts_with;
 use function strlen;
-use function strpos;
 use function strstr;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -273,7 +273,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     {
         $infectionPhar = '';
 
-        if (strpos(__FILE__, 'phar:') === 0) {
+        if (str_starts_with(__FILE__, 'phar:')) {
             $infectionPhar = sprintf(
                 '\Phar::loadPhar("%s", "%s");',
                 str_replace('phar://', '', Phar::running(true)),

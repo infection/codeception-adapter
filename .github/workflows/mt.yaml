@@ -16,15 +16,15 @@ jobs:
 
     strategy:
       matrix:
-        operating-system: [ubuntu-latest]
-        php-version: ['7.4']
-        coverage-driver: [pcov]
+        operating-system: [ ubuntu-latest ]
+        php-version: [ '8.1' ]
+        coverage-driver: [ pcov ]
 
     name: Mutation testing with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
