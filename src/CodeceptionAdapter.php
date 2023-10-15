@@ -56,8 +56,8 @@ use ReflectionClass;
 use function Safe\file_put_contents;
 use function sprintf;
 use function str_replace;
+use function str_starts_with;
 use function strlen;
-use function strpos;
 use function strstr;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -74,52 +74,26 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         '--fail-fast',
     ];
 
-    private string $testFrameworkExecutable;
-    private CommandLineBuilder $commandLineBuilder;
-    private VersionParser $versionParser;
-    private JUnitTestCaseSorter $jUnitTestCaseSorter;
-    private Filesystem $filesystem;
-    private string $jUnitFilePath;
-    private string $tmpDir;
-    private string $projectDir;
-
-    /**
-     * @var array<string, mixed>
-     */
-    private array $originalConfigContentParsed;
-
-    /**
-     * @var string[]
-     */
-    private array $srcDirs;
     private ?string $cachedVersion = null;
 
-    /**
-     * @param array<string, mixed> $originalConfigContentParsed
-     * @param array<string> $srcDirs
-     */
     public function __construct(
-        string $testFrameworkExecutable,
-        CommandLineBuilder $commandLineBuilder,
-        VersionParser $versionParser,
-        JUnitTestCaseSorter $jUnitTestCaseSorter,
-        Filesystem $filesystem,
-        string $jUnitFilePath,
-        string $tmpDir,
-        string $projectDir,
-        array $originalConfigContentParsed,
-        array $srcDirs
+        private string $testFrameworkExecutable,
+        private CommandLineBuilder $commandLineBuilder,
+        private VersionParser $versionParser,
+        private JUnitTestCaseSorter $jUnitTestCaseSorter,
+        private Filesystem $filesystem,
+        private string $jUnitFilePath,
+        private string $tmpDir,
+        private string $projectDir,
+        /**
+         * @var array<string, mixed>
+         */
+        private array $originalConfigContentParsed,
+        /**
+         * @var array<string>
+         */
+        private array $srcDirs
     ) {
-        $this->commandLineBuilder = $commandLineBuilder;
-        $this->testFrameworkExecutable = $testFrameworkExecutable;
-        $this->versionParser = $versionParser;
-        $this->jUnitFilePath = $jUnitFilePath;
-        $this->tmpDir = $tmpDir;
-        $this->jUnitTestCaseSorter = $jUnitTestCaseSorter;
-        $this->filesystem = $filesystem;
-        $this->projectDir = $projectDir;
-        $this->originalConfigContentParsed = $originalConfigContentParsed;
-        $this->srcDirs = $srcDirs;
     }
 
     public function hasJUnitReport(): bool
@@ -273,7 +247,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     {
         $infectionPhar = '';
 
-        if (strpos(__FILE__, 'phar:') === 0) {
+        if (str_starts_with(__FILE__, 'phar:')) {
             $infectionPhar = sprintf(
                 '\Phar::loadPhar("%s", "%s");',
                 str_replace('phar://', '', Phar::running(true)),

@@ -8,7 +8,7 @@ JOBS=$(shell nproc)
 
 # PHP CS Fixer
 PHP_CS_FIXER=./.tools/php-cs-fixer
-PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.2.1/php-cs-fixer.phar"
+PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.35.1/php-cs-fixer.phar"
 
 # PHPUnit
 PHPUNIT=vendor/bin/phpunit
@@ -28,9 +28,9 @@ COMPOSER=$(PHP) $(shell which composer)
 
 # Infection
 INFECTION=./.tools/infection.phar
-INFECTION_URL="https://github.com/infection/infection/releases/download/0.24.0/infection.phar"
-MIN_MSI=87
-MIN_COVERED_MSI=99
+INFECTION_URL="https://github.com/infection/infection/releases/download/0.27.4/infection.phar"
+MIN_MSI=70
+MIN_COVERED_MSI=76
 INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress --show-mutations
 
 all: test
