@@ -18,9 +18,12 @@ jobs:
 
     strategy:
       matrix:
-        php-version: [ '8.1', '8.2' ]
+        php-version: [ '8.1', '8.2', '8.3' ]
         coverage-driver: [ pcov ]
-        symfony-require: [ '^5', '^6' ]
+        symfony-require: [ '^5', '^6', '^7' ]
+        exclude:
+          - php-version: '8.1'
+            symfony-require: '^7'
 
     name: CI with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}, with Symfony ${{ matrix.symfony-require }}
 
