@@ -95,3 +95,20 @@ jobs:
         env:
           TERM: xterm-256color
         run: make test-e2e
+
+  # This is a meta job to avoid to have to constantly change the protection rules
+  # whenever we touch the matrix.
+  tests-status:
+    name: Tests Status
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: tests
+    if: always()
+    steps:
+      - name: Successful run
+        if: ${{ !(contains(needs.*.result, 'failure')) }}
+        run: exit 0
+
+      - name: Failing run
+        if: ${{ contains(needs.*.result, 'failure') }}
+        run: exit 1
