@@ -21,7 +21,7 @@ jobs:
       matrix:
         operating-system: [ ubuntu-latest ]
         php-version: [ '8.2' ]
-        check: [ 'cs', 'static-analyze' ]
+        check: [ 'cs', 'phpstan' ]
 
     name: Coding Standards on PHP ${{ matrix.php-version }}
 
