@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-version: [ '8.1' ]
+        php-version: [ '8.2' ]
         check: [ 'cs', 'static-analyze' ]
 
     name: Coding Standards on PHP ${{ matrix.php-version }}
