@@ -2,8 +2,8 @@
     "require-dev": {
         "codeception/codeception": "^5.0",
         "codeception/module-db": "^3.0.0",
-        "infection/infection": "0.26.19",
-        "infection/codeception-adapter": "dev-master"
+        "infection/infection": "@dev",
+        "infection/codeception-adapter": "@dev"
     },
     "autoload": {
         "psr-4": {
