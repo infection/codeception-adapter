@@ -102,7 +102,9 @@ jobs:
     name: Tests Status
     runs-on: ubuntu-latest
     timeout-minutes: 30
-    needs: tests
+    needs:
+      - tests
+      - e2e
     if: always()
     steps:
       - name: Successful run
