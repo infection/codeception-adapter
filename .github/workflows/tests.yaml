@@ -30,7 +30,7 @@ jobs:
           - php-version: '8.1'
             symfony-require: '^7'
 
-    name: CI with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}, with Symfony ${{ matrix.symfony-require }}
+    name: Unit tests on PHP ${{ matrix.php-version }} with Symfony ${{ matrix.symfony-require }} (${{ matrix.coverage-driver }})
 
     steps:
       - name: Checkout
@@ -80,7 +80,7 @@ jobs:
         php-version: [ '8.2', '8.3', '8.4', '8.5' ]
         coverage-driver: [ pcov ]
 
-    name: CI with PHP ${{ matrix.php-version }}, using ${{ matrix.coverage-driver }}
+    name: End-to-end with PHP ${{ matrix.php-version }} (${{ matrix.coverage-driver }})
 
     steps:
       - name: Checkout

@@ -21,9 +21,13 @@ jobs:
       matrix:
         operating-system: [ ubuntu-latest ]
         php-version: [ '8.2' ]
-        check: [ 'cs', 'phpstan' ]
+        check:
+          - makefile-target: 'cs'
+            name: 'CS'
+          - makefile-target: 'phpstan'
+            name: 'PHPStan'
 
-    name: Coding Standards on PHP ${{ matrix.php-version }}
+    name: ${{ matrix.check.name }} on PHP ${{ matrix.php-version }}
 
     steps:
       - name: Checkout
@@ -53,8 +57,8 @@ jobs:
         run: |
           composer install --no-interaction --no-progress --prefer-dist
 
-      - name: Run ${{ matrix.check }}
-        run: make ${{ matrix.check }}
+      - name: Run ${{ matrix.check.makefile-target }}
+        run: make ${{ matrix.check.makefile-target }}
 
   # This is a meta job to avoid to have to constantly change the protection rules
   # whenever we touch the matrix.
