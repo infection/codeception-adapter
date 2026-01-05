@@ -4,6 +4,7 @@
          bootstrap="./vendor/autoload.php"
          colors="true"
          executionOrder="random"
+         cacheResultFile="var/phpunit-cache"
          verbose="true"
 >
     <coverage>

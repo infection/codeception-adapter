@@ -1,4 +1,5 @@
 {
+    "$schema": "vendor/infection/infection/resources/schema.json",
     "timeout": 25,
     "source": {
         "directories": [
@@ -6,8 +7,8 @@
         ]
     },
     "logs": {
-        "summary": "infection.log"
+      "summary": "var/infection.log"
     },
-    "tmpDir": ".",
+    "tmpDir": "var/infection",
     "testFramework": "codeception"
 }

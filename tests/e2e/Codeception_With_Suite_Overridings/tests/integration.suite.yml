@@ -3,7 +3,7 @@ modules:
     enabled:
         - \Codeception_With_Suite_Overridings\Helper\Integration
         - Db:
-              dsn: 'sqlite:stuff.sq3'
+              dsn: 'sqlite:var/stuff.sq3'
               user: 'test'
               password: 'test'
               dump:
