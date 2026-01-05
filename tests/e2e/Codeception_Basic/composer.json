@@ -14,8 +14,8 @@
         }
     },
     "require": {
-        "infection/infection": "0.26.19",
-        "infection/codeception-adapter": "dev-master"
+        "infection/infection": "@dev",
+        "infection/codeception-adapter": "@dev"
     },
     "config": {
         "allow-plugins": {

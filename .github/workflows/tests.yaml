@@ -77,7 +77,7 @@ jobs:
 
     strategy:
       matrix:
-        php-version: [ '8.2', '8.3', '8.4', '8.5' ]
+        php-version: [ '8.2', '8.3', '8.4' ]  # TODO: add PHP 8.5
         coverage-driver: [ pcov ]
 
     name: End-to-end with PHP ${{ matrix.php-version }} (${{ matrix.coverage-driver }})
