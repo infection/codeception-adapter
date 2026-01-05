@@ -61,7 +61,7 @@ final class JUnitTestCaseSorter
             $uniqueCoverageTests,
             static function (TestLocation $a, TestLocation $b): int {
                 return $a->getExecutionTime() <=> $b->getExecutionTime();
-            }
+            },
         );
 
         return array_map(
@@ -71,7 +71,7 @@ final class JUnitTestCaseSorter
 
                 return $filePath;
             },
-            $uniqueCoverageTests
+            $uniqueCoverageTests,
         );
     }
 

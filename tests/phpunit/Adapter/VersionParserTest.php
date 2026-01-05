@@ -67,7 +67,7 @@ final class VersionParserTest extends TestCase
         } catch (InvalidArgumentException $exception) {
             $this->assertSame(
                 'Parameter does not contain a valid SemVer (sub)string.',
-                $exception->getMessage()
+                $exception->getMessage(),
             );
         }
     }

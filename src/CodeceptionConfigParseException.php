@@ -46,8 +46,8 @@ final class CodeceptionConfigParseException extends Exception
             sprintf(
                 "Error loading Yaml config from '%s'\n \n%s",
                 $configPath,
-                $originalException->getMessage()
-            )
+                $originalException->getMessage(),
+            ),
         );
     }
 }

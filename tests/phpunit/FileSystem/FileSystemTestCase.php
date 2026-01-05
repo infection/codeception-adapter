@@ -90,8 +90,8 @@ abstract class FileSystemTestCase extends TestCase
     {
         (new Filesystem())->remove(
             normalizePath(
-                realpath(sys_get_temp_dir()) . '/' . self::TMP_DIR_NAME
-            )
+                realpath(sys_get_temp_dir()) . '/' . self::TMP_DIR_NAME,
+            ),
         );
     }
 }

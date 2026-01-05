@@ -92,7 +92,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         /**
          * @var array<string>
          */
-        private array $srcDirs
+        private array $srcDirs,
     ) {
     }
 
@@ -160,8 +160,8 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
                     sprintf('coverage: include: %s', $this->getCoverageIncludeFiles($skipCoverage)),
                     '-o',
                     'settings: shuffle: true',
-                ]
-            )
+                ],
+            ),
         );
     }
 
@@ -175,7 +175,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         string $mutatedFilePath,
         string $mutationHash,
         string $mutationOriginalFilePath,
-        string $extraOptions
+        string $extraOptions,
     ): array {
         $argumentsAndOptions = $this->prepareArgumentsAndOptions($extraOptions);
 
@@ -186,7 +186,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         $interceptorFilePath = sprintf(
             '%s/interceptor.codeception.%s.php',
             $this->tmpDir,
-            $mutationHash
+            $mutationHash,
         );
 
         file_put_contents($interceptorFilePath, $this->createCustomBootstrapWithInterceptor($mutationOriginalFilePath, $mutatedFilePath), LOCK_EX);
@@ -208,7 +208,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
                 "bootstrap: {$interceptorFilePath}",
                 '-o',
                 "groups: infection: [$uniqueTestFilePaths]",
-            ]
+            ],
         );
     }
 
@@ -221,7 +221,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         $testFrameworkVersionExecutable = $this->commandLineBuilder->build(
             $this->testFrameworkExecutable,
             [],
-            ['--version']
+            ['--version'],
         );
 
         $process = new Process($testFrameworkVersionExecutable);
@@ -251,21 +251,21 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
             $infectionPhar = sprintf(
                 '\Phar::loadPhar("%s", "%s");',
                 str_replace('phar://', '', Phar::running(true)),
-                'infection.phar'
+                'infection.phar',
             );
         }
 
         $namespacePrefix = $this->getInterceptorNamespacePrefix();
 
         return <<<CONTENT
-{$infectionPhar}
-require_once '{$interceptorPath}';
+            {$infectionPhar}
+            require_once '{$interceptorPath}';
 
-use {$namespacePrefix}Infection\StreamWrapper\IncludeInterceptor;
+            use {$namespacePrefix}Infection\StreamWrapper\IncludeInterceptor;
 
-IncludeInterceptor::intercept('{$originalFilePath}', '{$mutatedFilePath}');
-IncludeInterceptor::enable();
-CONTENT;
+            IncludeInterceptor::intercept('{$originalFilePath}', '{$mutatedFilePath}');
+            IncludeInterceptor::enable();
+            CONTENT;
     }
 
     private function createCustomBootstrapWithInterceptor(string $originalFilePath, string $mutatedFilePath): string
@@ -277,17 +277,17 @@ CONTENT;
         $interceptorPath = $class->getFileName();
 
         $customBootstrap = <<<AUTOLOAD
-<?php
+            <?php
 
-%s
-%s
+            %s
+            %s
 
-AUTOLOAD;
+            AUTOLOAD;
 
         return sprintf(
             $customBootstrap,
             $bootstrapPlaceholder,
-            $this->getInterceptorFileContent((string) $interceptorPath, $originalFilePath, $mutatedFilePath)
+            $this->getInterceptorFileContent((string) $interceptorPath, $originalFilePath, $mutatedFilePath),
         );
     }
 
@@ -305,7 +305,7 @@ AUTOLOAD;
             '%s/%s/%s',
             $this->projectDir,
             $this->originalConfigContentParsed['paths']['tests'] ?? 'tests',
-            $this->originalConfigContentParsed['bootstrap']
+            $this->originalConfigContentParsed['bootstrap'],
         );
     }
 
@@ -325,7 +325,7 @@ AUTOLOAD;
         return array_filter(array_merge(
             ['run'],
             explode(' ', $extraOptions),
-            self::DEFAULT_ARGS_AND_OPTIONS
+            self::DEFAULT_ARGS_AND_OPTIONS,
         ));
     }
 
@@ -344,7 +344,7 @@ AUTOLOAD;
                 static function (string $dir): string {
                     return trim($dir, '/') . '/*.php';
                 },
-                $this->srcDirs
+                $this->srcDirs,
             );
 
         return Stringifier::stringifyArray($includedFiles);

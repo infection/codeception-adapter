@@ -55,7 +55,9 @@ use Symfony\Component\Filesystem\Filesystem;
 final class CodeceptionAdapterTest extends FileSystemTestCase
 {
     private const MUTATION_HASH = 'a1b2c3';
+
     private const ORIGINAL_FILE_PATH = '/original/file/path';
+
     private const MUTATED_FILE_PATH = '/mutated/file/path';
 
     private const DEFAULT_CONFIG = [
@@ -206,7 +208,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            ''
+            '',
         );
 
         $this->assertContains('coverage: enabled: false', $commandLine);
@@ -220,7 +222,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            '--filter=xyz'
+            '--filter=xyz',
         );
 
         $this->assertContains('--filter=xyz', $commandLine);
@@ -234,7 +236,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            '--filter=xyz'
+            '--filter=xyz',
         );
 
         $this->assertContains('--group', $commandLine);
@@ -249,7 +251,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            '--filter=xyz'
+            '--filter=xyz',
         );
 
         $this->assertContains('--bootstrap', $commandLine);
@@ -264,7 +266,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            ''
+            '',
         );
 
         $expectedConfigPath = $this->tmp . '/interceptor.codeception.a1b2c3.php';
@@ -281,12 +283,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            ''
+            '',
         );
 
         $this->assertStringNotContainsString(
             'bootstrap',
-            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php'),
         );
     }
 
@@ -296,7 +298,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::DEFAULT_CONFIG,
             [
                 'bootstrap' => '/original/bootstrap.php',
-            ]
+            ],
         );
 
         $adapter = $this->createAdapter($config);
@@ -306,12 +308,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            ''
+            '',
         );
 
         $this->assertStringContainsString(
             "require_once '/original/bootstrap.php';",
-            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php'),
         );
     }
 
@@ -321,7 +323,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::DEFAULT_CONFIG,
             [
                 'bootstrap' => 'original/bootstrap.php',
-            ]
+            ],
         );
 
         $adapter = $this->createAdapter($config);
@@ -331,12 +333,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            ''
+            '',
         );
 
         $this->assertStringContainsString(
             "tests/original/bootstrap.php';",
-            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php')
+            (string) file_get_contents($this->tmp . '/interceptor.codeception.a1b2c3.php'),
         );
     }
 
@@ -361,12 +363,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             self::MUTATED_FILE_PATH,
             self::MUTATION_HASH,
             self::ORIGINAL_FILE_PATH,
-            '--skip blah'
+            '--skip blah',
         );
 
         $this->assertStringContainsString(
             'path/to/codeception run --skip blah',
-            implode(' ', $commandLine)
+            implode(' ', $commandLine),
         );
     }
 
@@ -385,7 +387,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             $this->tmp,
             $this->pathToProject,
             $config ?? self::DEFAULT_CONFIG,
-            ['projectSrc/dir']
+            ['projectSrc/dir'],
         );
     }
 }

@@ -56,7 +56,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         string $jUnitFilePath,
         string $projectDir,
         array $sourceDirectories,
-        bool $skipCoverage
+        bool $skipCoverage,
     ): TestFrameworkAdapter {
         return new CodeceptionAdapter(
             $testFrameworkExecutable,
@@ -68,7 +68,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
             $tmpDir,
             $projectDir,
             self::parseYaml($testFrameworkConfigPath),
-            $sourceDirectories
+            $sourceDirectories,
         );
     }
 
