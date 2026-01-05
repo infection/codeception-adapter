@@ -92,7 +92,7 @@ final class CommandLineBuilder
             $this->findPhp(),
             $phpExtraArgs,
             [$testFrameworkExecutable],
-            $frameworkArgs
+            $frameworkArgs,
         );
 
         return array_filter($commandLineArgs);

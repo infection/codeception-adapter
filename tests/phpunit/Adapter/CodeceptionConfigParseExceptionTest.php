@@ -52,9 +52,9 @@ final class CodeceptionConfigParseExceptionTest extends TestCase
             sprintf(
                 "Error loading Yaml config from '%s'\n \n%s",
                 '/path',
-                $originalException->getMessage()
+                $originalException->getMessage(),
             ),
-            $exception->getMessage()
+            $exception->getMessage(),
         );
     }
 }

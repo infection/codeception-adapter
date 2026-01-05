@@ -56,7 +56,7 @@ final class JUnitTestCaseSorterTest extends TestCase
                 '/path/build.php',
                 '/path/test.php',
             ],
-            $sorter->getUniqueSortedFileNames($tests)
+            $sorter->getUniqueSortedFileNames($tests),
         );
     }
 }

@@ -55,7 +55,7 @@ final class CodeceptionAdapterFactoryTest extends TestCase
             '/path/to/junit.xml',
             '/path/to/project',
             [],
-            true
+            true,
         );
 
         $this->assertInstanceOf(CodeceptionAdapter::class, $adapter);
@@ -83,7 +83,7 @@ final class CodeceptionAdapterFactoryTest extends TestCase
             '/path/to/junit.xml',
             '/path/to/project',
             [],
-            true
+            true,
         );
     }
 }
