@@ -50,6 +50,7 @@ $finder = Finder::create()
         '.github',
         'build',
         'tests/e2e',
+        'var',
     ])
     ->ignoreDotFiles(false)
     ->name('*php')
@@ -151,4 +152,5 @@ return (new Config())
         ],
     ])
     ->setFinder($finder)
+    ->setCacheFile(__DIR__ . '/var/cache/php-cs-fixer')
 ;

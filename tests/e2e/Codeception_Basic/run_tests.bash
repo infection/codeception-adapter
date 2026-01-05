@@ -27,5 +27,5 @@ composer install
 
 run "vendor/bin/infection"
 
-diff -w expected-output.txt infection.log
+diff -w expected-output.txt var/infection.log
 
