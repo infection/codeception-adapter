@@ -24,7 +24,7 @@ test: codecept infection
 
 .PHONY: codecept
 codecept: vendor/autoload.php
-	XDEBUG_MODE=coverage vendor/bin/codecept run
+	vendor/bin/codecept run
 
 .PHONY: codecept_coverage
 codecept_coverage: 	## Executes the tests with code coverage
