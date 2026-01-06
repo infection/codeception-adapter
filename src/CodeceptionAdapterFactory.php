@@ -85,7 +85,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 
     private static function createDefaultCoverageXmlDirectoryPath(string $tmpDirectory): string
     {
-        return $tmpDirectory . '/' . 'codeception-coverage-xml';
+        return $tmpDirectory . '/coverage-xml';
     }
 
     /**
