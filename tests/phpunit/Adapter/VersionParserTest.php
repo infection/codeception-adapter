@@ -35,8 +35,8 @@ declare(strict_types=1);
 
 namespace Infection\Tests\TestFramework\Codeception\Adapter;
 
+use Infection\AbstractTestFramework\InvalidVersion;
 use Infection\TestFramework\Codeception\VersionParser;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 final class VersionParserTest extends TestCase
@@ -45,7 +45,7 @@ final class VersionParserTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->versionParser = new VersionParser();
+        $this->versionParser = new VersionParser('Codeception');
     }
 
     /**
@@ -64,9 +64,9 @@ final class VersionParserTest extends TestCase
             $this->versionParser->parse('abc');
 
             $this->fail();
-        } catch (InvalidArgumentException $exception) {
+        } catch (InvalidVersion $exception) {
             $this->assertSame(
-                'Parameter does not contain a valid SemVer (sub)string.',
+                'Could not recognise the test framework version for Codeception for the value "abc".',
                 $exception->getMessage(),
             );
         }

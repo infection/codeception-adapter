@@ -33,40 +33,25 @@
 
 declare(strict_types=1);
 
-namespace Infection\TestFramework\Codeception;
+namespace Infection\TestFramework\Codeception\Throwable;
 
 use Infection\AbstractTestFramework\InvalidVersion;
-use Infection\TestFramework\Codeception\Throwable\InvalidVersionFactory;
-use InvalidArgumentException;
-use function preg_match;
+use function sprintf;
 
-/**
- * @internal
- */
-class VersionParser
+final class InvalidVersionFactory
 {
-    private const VERSION_REGEX = '/(?<version>[0-9]+\.[0-9]+\.?[0-9]*)(?<prerelease>-[0-9a-zA-Z.]+)?(?<build>\+[0-9a-zA-Z.]+)?/';
-
-    public function __construct(
-        private readonly string $name,
-    ) {
+    private function __construct()
+    {
     }
 
-    /**
-     * @throws InvalidVersion
-     */
-    public function parse(string $content): string
+    public static function create(string $testFrameworkName, string $version): InvalidVersion
     {
-        $matches = [];
-        $matched = preg_match(self::VERSION_REGEX, $content, $matches) > 0;
-
-        if (!$matched) {
-            throw InvalidVersionFactory::create(
-                $this->name,
-                $content,
-            );
-        }
-
-        return $matches[0];
+        return new InvalidVersion(
+            sprintf(
+                'Could not recognise the test framework version for %s for the value "%s".',
+                $testFrameworkName,
+                $version,
+            ),
+        );
     }
 }
