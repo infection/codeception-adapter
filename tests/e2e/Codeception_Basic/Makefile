@@ -31,7 +31,9 @@ codecept_coverage: 	## Executes the tests with code coverage
 codecept_coverage: vendor/autoload.php
 	XDEBUG_MODE=coverage vendor/bin/codecept run \
 		--coverage-phpunit=coverage-xml \
-		--xml=junit.xml
+		--xml=junit.xml \
+		--override="paths: output: $(shell pwd)/var/coverage" \
+		--override="settings: shuffle: true"
 
 .PHONY: infection
 infection: vendor/autoload.php
