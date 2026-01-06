@@ -67,6 +67,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
             $jUnitFilePath,
             $tmpDir,
             $projectDir,
+            self::createDefaultCoverageXmlDirectoryPath($tmpDir),
             self::parseYaml($testFrameworkConfigPath),
             $sourceDirectories,
         );
@@ -80,6 +81,11 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
     public static function getExecutableName(): string
     {
         return 'codecept';
+    }
+
+    private static function createDefaultCoverageXmlDirectoryPath(string $tmpDirectory): string
+    {
+        return $tmpDirectory . '/' . 'codeception-coverage-xml';
     }
 
     /**
