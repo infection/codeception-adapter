@@ -62,12 +62,19 @@ use function strstr;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
 use function trim;
+use function version_compare;
 
 final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
     public const COVERAGE_DIR = 'codeception-coverage-xml';
 
     public const NAME = 'codeception';
+
+    /**
+     * Minimum version of Codeception that supports the --disable-coverage-php flag.
+     * This flag was introduced in Codeception 5.2.0.
+     */
+    private const MIN_VERSION_DISABLE_COVERAGE_PHP = '5.2.0';
 
     private const DEFAULT_ARGS_AND_OPTIONS = [
         '--no-colors',
@@ -161,6 +168,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
                     '-o',
                     'settings: shuffle: true',
                 ],
+                $this->getDisableCoveragePhpOptions($skipCoverage),
             ),
         );
     }
@@ -241,6 +249,31 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     public function getInitialTestsFailRecommendations(string $commandLine): string
     {
         return sprintf('Check the executed command to identify the problem: %s', $commandLine);
+    }
+
+    /**
+     * Returns the --disable-coverage-php option if coverage is enabled and the Codeception
+     * version supports it (>= 5.2.0).
+     *
+     * @return string[]
+     */
+    private function getDisableCoveragePhpOptions(bool $skipCoverage): array
+    {
+        if ($skipCoverage) {
+            return [];
+        }
+
+        $version = $this->getVersion();
+
+        if ($version === 'unknown') {
+            return [];
+        }
+
+        if (version_compare($version, self::MIN_VERSION_DISABLE_COVERAGE_PHP, '<')) {
+            return [];
+        }
+
+        return ['--disable-coverage-php'];
     }
 
     private function getInterceptorFileContent(string $interceptorPath, string $originalFilePath, string $mutatedFilePath): string
