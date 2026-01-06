@@ -9,8 +9,12 @@ actor_suffix: Tester
 extensions:
     enabled:
         - Codeception\Extension\RunFailed
-    include:
-        - src/*
 settings:
     shuffle: false
     strict_xml: true
+coverage:
+    enabled: true
+    include:
+        - src/*
+    exclude:
+        - vendor/*
