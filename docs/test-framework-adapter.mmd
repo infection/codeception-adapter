@@ -1,0 +1,16 @@
+graph TB
+    Project["Any project that uses Infection"]
+    Adapter["infection/phpspec-adapter"]
+    Infection["infection/infection"]
+    AbstractAdapter["infection/abstract-testframework-adapter<br/>TestFrameworkAdapter"]
+    OtherAdapters["Other test framework adapters<br/>..."]
+
+    Project --> Infection
+    Project -.-> Adapter
+    Infection --> AbstractAdapter
+    Infection --> OtherAdapters
+    Adapter --> AbstractAdapter
+
+    style AbstractAdapter fill:#f9f9f9
+    style Infection fill:#f9f9f9
+    style OtherAdapters fill:#f9f9f9,stroke-dasharray: 5 5
