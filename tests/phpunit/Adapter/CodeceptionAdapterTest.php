@@ -61,6 +61,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
 
     private const MUTATED_FILE_PATH = '/mutated/file/path';
 
+    private const TEST_CODE_COVERAGE_XML_PATH = 'relative/path/to/codeception-coverage-xml';
+
     private const DEFAULT_CONFIG = [
         'paths' => [
             'tests' => 'tests',
@@ -148,7 +150,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
         $this->assertContains('--coverage-phpunit', $commandLine);
-        $this->assertContains($this->tmp . '/' . 'codeception-coverage-xml', $commandLine);
+        $this->assertContains(self::TEST_CODE_COVERAGE_XML_PATH, $commandLine);
     }
 
     public function test_it_sets_junit_xml_path(): void
@@ -387,7 +389,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             'path/to/junit',
             $this->tmp,
             $this->pathToProject,
-            $this->tmp . '/' . 'codeception-coverage-xml',
+            self::TEST_CODE_COVERAGE_XML_PATH,
             $config ?? self::DEFAULT_CONFIG,
             ['projectSrc/dir'],
         );
