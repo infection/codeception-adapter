@@ -10,16 +10,6 @@ help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | awk 'BEGIN {FS = ":"}; {printf "\033[33m%s:\033[0m%s\n", $$1, $$2}'
 
 
-
-
-.PHONY: ci test prerequisites
-
-# Use any most recent PHP version
-PHP=$(shell which php)
-
-# Default parallelism
-JOBS=$(shell nproc)
-
 # PHP CS Fixer
 PHP_CS_FIXER=./.tools/php-cs-fixer
 PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.35.1/php-cs-fixer.phar"
@@ -33,23 +23,16 @@ PHPUNIT_ARGS=--coverage-xml=build/logs/coverage-xml --log-junit=build/logs/junit
 PHPSTAN=vendor/bin/phpstan
 PHPSTAN_ARGS=analyse src tests/phpunit -c .phpstan.neon
 
-# Composer
-COMPOSER=$(PHP) $(shell which composer)
-
 # Infection
 INFECTION=./.tools/infection.phar
 INFECTION_URL="https://github.com/infection/infection/releases/download/0.27.4/infection.phar"
 MIN_MSI=78
 MIN_COVERED_MSI=82
-INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=$(JOBS) --log-verbosity=none --no-interaction --no-progress --show-mutations
+INFECTION_ARGS=--min-msi=$(MIN_MSI) --min-covered-msi=$(MIN_COVERED_MSI) --threads=max --log-verbosity=none --no-interaction --no-progress --show-mutations
 
 .PHONY: all
-all:	## Executes all checks
+all:	 ## Executes all checks
 all: cs-lint test
-
-cs: $(PHP_CS_FIXER)
-	$(PHP_CS_FIXER) fix -v --diff --dry-run
-	LC_ALL=C sort -u .gitignore -o .gitignore
 
 .PHONY: cs
 cs:	 ## Apply CS fixes
@@ -94,16 +77,16 @@ test-e2e: vendor/autoload.php
 
 .PHONY: infection
 infection: $(INFECTION)
-	$(INFECTION) $(INFECTION_ARGS)
+	composer $(INFECTION_ARGS)
 
 # Do install if there's no 'vendor'
 vendor/autoload.php:
-	$(COMPOSER) install --prefer-dist
+	composer install --prefer-dist
 
 # If composer.lock is older than `composer.json`, do update,
 # and touch composer.lock because composer not always does that
 composer.lock: composer.json
-	$(COMPOSER) update
+	composer update
 	touch -c $@
 
 
