@@ -40,7 +40,6 @@ use function file_get_contents;
 use Generator;
 use function implode;
 use Infection\TestFramework\Codeception\CodeceptionAdapter;
-use Infection\TestFramework\Codeception\CodeceptionAdapterFactory;
 use Infection\TestFramework\Codeception\CommandLineBuilder;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use Infection\TestFramework\Codeception\VersionParser;
