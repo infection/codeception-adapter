@@ -37,7 +37,6 @@ namespace Infection\TestFramework\Codeception;
 
 use Infection\AbstractTestFramework\InvalidVersion;
 use Infection\TestFramework\Codeception\Throwable\InvalidVersionFactory;
-use InvalidArgumentException;
 use function preg_match;
 
 /**
