@@ -22,7 +22,7 @@ jobs:
         operating-system: [ ubuntu-latest ]
         php-version: [ '8.2' ]
         check:
-          - makefile-target: 'cs'
+          - makefile-target: 'cs-lint'
             name: 'CS'
           - makefile-target: 'phpstan'
             name: 'PHPStan'

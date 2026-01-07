@@ -40,6 +40,7 @@ use Infection\AbstractTestFramework\TestFrameworkAdapterFactory;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use function Safe\file_get_contents;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -66,7 +67,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
             new VersionParser(),
             new JUnitTestCaseSorter(),
             new Filesystem(),
-            $jUnitFilePath,
+            Path::makeRelative($jUnitFilePath, $tmpDir),
             $tmpDir,
             $projectDir,
             // For Codeception the coverage path is relative to the output

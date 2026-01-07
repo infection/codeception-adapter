@@ -9,5 +9,6 @@
 /tests/**/_generated/
 /tests/**/_output/
 /tests/e2e/*/var/
+!/tests/e2e/*/var/.gitkeep
 /var/
 /vendor/
