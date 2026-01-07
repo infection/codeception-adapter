@@ -40,7 +40,6 @@ use function file_get_contents;
 use Generator;
 use function implode;
 use Infection\TestFramework\Codeception\CodeceptionAdapter;
-use Infection\TestFramework\Codeception\CodeceptionAdapterFactory;
 use Infection\TestFramework\Codeception\CommandLineBuilder;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
 use Infection\TestFramework\Codeception\VersionParser;
@@ -60,6 +59,8 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     private const ORIGINAL_FILE_PATH = '/original/file/path';
 
     private const MUTATED_FILE_PATH = '/mutated/file/path';
+
+    private const TEST_CODE_COVERAGE_XML_PATH = 'relative/path/to/codeception-coverage-xml';
 
     private const DEFAULT_CONFIG = [
         'paths' => [
@@ -148,7 +149,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
 
         $this->assertContains('--coverage-phpunit', $commandLine);
-        $this->assertContains($this->tmp . '/' . 'codeception-coverage-xml', $commandLine);
+        $this->assertContains(self::TEST_CODE_COVERAGE_XML_PATH, $commandLine);
     }
 
     public function test_it_sets_junit_xml_path(): void
@@ -387,7 +388,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             'path/to/junit',
             $this->tmp,
             $this->pathToProject,
-            $this->tmp . '/' . 'codeception-coverage-xml',
+            self::TEST_CODE_COVERAGE_XML_PATH,
             $config ?? self::DEFAULT_CONFIG,
             ['projectSrc/dir'],
         );
