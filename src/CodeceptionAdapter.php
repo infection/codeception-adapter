@@ -35,6 +35,7 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception;
 
+use Infection\AbstractTestFramework\InvalidVersion;
 use function array_filter;
 use function array_key_exists;
 use function array_map;
@@ -229,7 +230,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
         try {
             $version = $this->versionParser->parse($process->getOutput());
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidVersion) {
             $version = 'unknown';
         }
 
