@@ -46,6 +46,7 @@ use Infection\TestFramework\Codeception\VersionParser;
 use Infection\Tests\TestFramework\Codeception\FileSystem\FileSystemTestCase;
 use function Infection\Tests\TestFramework\Codeception\normalizePath as p;
 use function realpath;
+use ReflectionProperty;
 use function sprintf;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -171,7 +172,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
 
     public function test_it_enables_coverage_if_not_skipped(): void
     {
-        $adapter = $this->createAdapter();
+        $adapter = $this->createAdapter(null, '5.1.0');
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
         $this->assertContains('coverage: enabled: true', $commandLine);
@@ -188,7 +189,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
 
     public function test_it_populates_include_coverage_key_from_src_folders_if_not_set(): void
     {
-        $adapter = $this->createAdapter();
+        $adapter = $this->createAdapter(null, '5.1.0');
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
         $this->assertContains('coverage: include: [projectSrc/dir/*.php]', $commandLine);
@@ -196,7 +197,7 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
 
     public function test_it_runs_tests_with_a_random_order(): void
     {
-        $adapter = $this->createAdapter();
+        $adapter = $this->createAdapter(null, '5.1.0');
         $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
 
         $this->assertContains('settings: shuffle: true', $commandLine);
@@ -375,11 +376,64 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     }
 
     /**
+     * @dataProvider phpCoverageOptionProvider
+     */
+    public function test_it_disables_the_php_coverage_when_it_can(
+        string $version,
+        bool $skipCoverage,
+        bool $expected,
+    ): void {
+        $commandLine = $this
+            ->createAdapter(version: $version)
+            ->getInitialTestRunCommandLine(
+                '',
+                [],
+                $skipCoverage,
+            );
+
+        if ($expected) {
+            $this->assertContains('--disable-coverage-php', $commandLine);
+        } else {
+            $this->assertNotContains('--disable-coverage-php', $commandLine);
+        }
+    }
+
+    /**
+     * @return iterable<array{string, bool, bool}>
+     */
+    public static function phpCoverageOptionProvider(): iterable
+    {
+        yield 'first version in which the option was introduced' => [
+            '5.2.0',
+            false,
+            true,
+        ];
+
+        yield 'a version which supports the option' => [
+            '5.3.0',
+            false,
+            true,
+        ];
+
+        yield 'a version which does not support the version' => [
+            '5.1.0',
+            false,
+            false,
+        ];
+
+        yield 'a version which supports the option with coverage skipped' => [
+            '5.3.0',
+            true,
+            false,
+        ];
+    }
+
+    /**
      * @param array<string, mixed>|null $config
      */
-    private function createAdapter(?array $config = null): CodeceptionAdapter
+    private function createAdapter(?array $config = null, ?string $version = 'unknown'): CodeceptionAdapter
     {
-        return new CodeceptionAdapter(
+        $adapter = new CodeceptionAdapter(
             '/path/to/codeception',
             new CommandLineBuilder(),
             new VersionParser(),
@@ -392,5 +446,12 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
             $config ?? self::DEFAULT_CONFIG,
             ['projectSrc/dir'],
         );
+
+        if ($version !== null) {
+            $reflection = new ReflectionProperty($adapter, 'cachedVersion');
+            $reflection->setValue($adapter, $version);
+        }
+
+        return $adapter;
     }
 }
