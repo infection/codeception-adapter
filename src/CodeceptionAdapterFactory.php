@@ -45,7 +45,7 @@ use Symfony\Component\Yaml\Yaml;
 
 final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 {
-    private const COVERAGE_DIR = 'codeception-coverage-xml';
+    private const COVERAGE_DIR = 'coverage-xml';
 
     /**
      * @param string[] $sourceDirectories
