@@ -375,58 +375,63 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
         );
     }
 
-    public function test_it_adds_disable_coverage_php_flag_for_codeception_5_2_0_and_above(): void
-    {
-        $adapter = $this->createAdapter(null, '5.2.0');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
+    /**
+     * @dataProvider phpCoverageOptionProvider
+     */
+    public function test_it_disables_the_php_coverage_when_it_can(
+        string $version,
+        bool $skipCoverage,
+        bool $expected,
+    ): void {
+        $commandLine = $this
+            ->createAdapter(version: $version)
+            ->getInitialTestRunCommandLine(
+                '',
+                [],
+                $skipCoverage,
+            );
 
-        $this->assertContains('--disable-coverage-php', $commandLine);
+        if ($expected) {
+            $this->assertContains('--disable-coverage-php', $commandLine);
+        } else {
+            $this->assertNotContains('--disable-coverage-php', $commandLine);
+        }
     }
 
-    public function test_it_adds_disable_coverage_php_flag_for_codeception_5_3_0(): void
+    /**
+     * @return iterable<array{string, bool, bool}>
+     */
+    public static function phpCoverageOptionProvider(): iterable
     {
-        $adapter = $this->createAdapter(null, '5.3.0');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
+        yield 'first version in which the option was introduced' => [
+            '5.2.0',
+            false,
+            true,
+        ];
 
-        $this->assertContains('--disable-coverage-php', $commandLine);
-    }
+        yield 'a version which supports the option' => [
+            '5.3.0',
+            false,
+            true,
+        ];
 
-    public function test_it_does_not_add_disable_coverage_php_flag_for_codeception_below_5_2_0(): void
-    {
-        $adapter = $this->createAdapter(null, '5.1.0');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
+        yield 'a version which does not support the version' => [
+            '5.1.0',
+            false,
+            false,
+        ];
 
-        $this->assertNotContains('--disable-coverage-php', $commandLine);
-    }
-
-    public function test_it_does_not_add_disable_coverage_php_flag_for_codeception_4_x(): void
-    {
-        $adapter = $this->createAdapter(null, '4.2.3');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
-
-        $this->assertNotContains('--disable-coverage-php', $commandLine);
-    }
-
-    public function test_it_does_not_add_disable_coverage_php_flag_when_coverage_is_skipped(): void
-    {
-        $adapter = $this->createAdapter(null, '5.2.0');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], true);
-
-        $this->assertNotContains('--disable-coverage-php', $commandLine);
-    }
-
-    public function test_it_does_not_add_disable_coverage_php_flag_when_version_is_unknown(): void
-    {
-        $adapter = $this->createAdapter(null, 'unknown');
-        $commandLine = $adapter->getInitialTestRunCommandLine('', [], false);
-
-        $this->assertNotContains('--disable-coverage-php', $commandLine);
+        yield 'a version which supports the option with coverage skipped' => [
+            '5.3.0',
+            true,
+            false,
+        ];
     }
 
     /**
      * @param array<string, mixed>|null $config
      */
-    private function createAdapter(?array $config = null, ?string $version = null): CodeceptionAdapter
+    private function createAdapter(?array $config = null, ?string $version = 'unknown'): CodeceptionAdapter
     {
         $adapter = new CodeceptionAdapter(
             '/path/to/codeception',
