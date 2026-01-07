@@ -46,6 +46,8 @@ use Symfony\Component\Yaml\Yaml;
 
 final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 {
+    private const COVERAGE_DIR = 'coverage-xml';
+
     /**
      * @param string[] $sourceDirectories
      */
@@ -68,6 +70,9 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
             Path::makeRelative($jUnitFilePath, $tmpDir),
             $tmpDir,
             $projectDir,
+            // For Codeception the coverage path is relative to the output
+            // directory configured.
+            self::COVERAGE_DIR,
             self::parseYaml($testFrameworkConfigPath),
             $sourceDirectories,
         );

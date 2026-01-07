@@ -6,6 +6,8 @@
 /.tools/
 /build/
 /infection.log
+/tests/**/_generated/
+/tests/**/_output/
 /tests/e2e/*/var/
 /var/
 /vendor/
