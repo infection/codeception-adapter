@@ -10,8 +10,6 @@ help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | awk 'BEGIN {FS = ":"}; {printf "\033[33m%s:\033[0m%s\n", $$1, $$2}'
 
 INFECTION=vendor/bin/infection
-MIN_MSI=68
-MIN_COVERED_MSI=97
 
 
 .PHONY: check
@@ -36,11 +34,8 @@ codecept_coverage: vendor/autoload.php
 .PHONY: infection
 infection: vendor/autoload.php
 	$(INFECTION) \
-		--min-msi=$(MIN_MSI) \
-		--min-covered-msi=$(MIN_COVERED_MSI) \
 		--threads=max \
-		--show-mutations \
-		--test-framework="codeception"
+		--show-mutations=0
 	diff --ignore-all-space expected-output.txt var/infection.log
 
 # Do install if there's no 'vendor'
