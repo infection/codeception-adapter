@@ -45,7 +45,7 @@ final class VersionParserTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->versionParser = new VersionParser('Codeception');
+        $this->versionParser = new VersionParser('TestCodeception');
     }
 
     /**
@@ -60,16 +60,13 @@ final class VersionParserTest extends TestCase
 
     public function test_it_throws_exception_when_content_has_no_version_substring(): void
     {
-        try {
-            $this->versionParser->parse('abc');
+        $this->expectExceptionObject(
+            new InvalidVersion(
+                'Could not recognise the test framework version for TestCodeception for the value "abc".',
+            ),
+        );
 
-            $this->fail();
-        } catch (InvalidVersion $exception) {
-            $this->assertSame(
-                'Could not recognise the test framework version for Codeception for the value "abc".',
-                $exception->getMessage(),
-            );
-        }
+        $this->versionParser->parse('abc');
     }
 
     /**
