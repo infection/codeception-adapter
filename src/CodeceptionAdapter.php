@@ -65,8 +65,6 @@ use function trim;
 
 final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 {
-    public const COVERAGE_DIR = 'codeception-coverage-xml';
-
     public const NAME = 'codeception';
 
     private const DEFAULT_ARGS_AND_OPTIONS = [
@@ -85,6 +83,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         private string $jUnitFilePath,
         private string $tmpDir,
         private string $projectDir,
+        private string $coveragePath,
         /**
          * @var array<string, mixed>
          */
@@ -148,7 +147,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
                 $argumentsAndOptions,
                 [
                     '--coverage-phpunit',
-                    self::COVERAGE_DIR,
+                    $this->coveragePath,
                     // JUnit report
                     '--xml',
                     $this->jUnitFilePath,
