@@ -38,9 +38,9 @@ namespace Infection\TestFramework\Codeception;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\AbstractTestFramework\TestFrameworkAdapterFactory;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
-use Symfony\Component\Filesystem\Path;
 use function Safe\file_get_contents;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
