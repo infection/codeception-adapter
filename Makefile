@@ -77,7 +77,7 @@ test-e2e: vendor/autoload.php
 
 .PHONY: infection
 infection: $(INFECTION)
-	composer $(INFECTION_ARGS)
+	$(INFECTION) $(INFECTION_ARGS)
 
 # Do install if there's no 'vendor'
 vendor/autoload.php:
