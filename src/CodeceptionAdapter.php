@@ -43,11 +43,11 @@ use function assert;
 use function explode;
 use function implode;
 use Infection\AbstractTestFramework\Coverage\TestLocation;
+use Infection\AbstractTestFramework\InvalidVersion;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\StreamWrapper\IncludeInterceptor;
 use Infection\TestFramework\Codeception\Coverage\JUnitTestCaseSorter;
-use InvalidArgumentException;
 use function is_string;
 use const LOCK_EX;
 use Phar;
@@ -237,7 +237,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
         try {
             $version = $this->versionParser->parse($process->getOutput());
-        } catch (InvalidArgumentException $e) {
+        } catch (InvalidVersion) {
             $version = 'unknown';
         }
 

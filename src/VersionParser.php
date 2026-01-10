@@ -35,8 +35,9 @@ declare(strict_types=1);
 
 namespace Infection\TestFramework\Codeception;
 
-use InvalidArgumentException;
+use Infection\AbstractTestFramework\InvalidVersion;
 use function preg_match;
+use function sprintf;
 
 /**
  * @internal
@@ -45,15 +46,34 @@ class VersionParser
 {
     private const VERSION_REGEX = '/(?<version>[0-9]+\.[0-9]+\.?[0-9]*)(?<prerelease>-[0-9a-zA-Z.]+)?(?<build>\+[0-9a-zA-Z.]+)?/';
 
+    /**
+     * @throws InvalidVersion
+     */
     public function parse(string $content): string
     {
         $matches = [];
         $matched = preg_match(self::VERSION_REGEX, $content, $matches) > 0;
 
         if (!$matched) {
-            throw new InvalidArgumentException('Parameter does not contain a valid SemVer (sub)string.');
+            throw self::createInvalidVersion(
+                CodeceptionAdapter::NAME,
+                $content,
+            );
         }
 
         return $matches[0];
+    }
+
+    private static function createInvalidVersion(
+        string $testFrameworkName,
+        string $version,
+    ): InvalidVersion {
+        return new InvalidVersion(
+            sprintf(
+                'Could not recognise the test framework version for %s for the value "%s".',
+                $testFrameworkName,
+                $version,
+            ),
+        );
     }
 }
