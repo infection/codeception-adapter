@@ -62,6 +62,12 @@ class CalculatorContext
         $this->result = $this->calculator->isPositive((int) $number);
     }
 
+    #[When('/^I compute the absolute value of (-?\d+)$/')]
+    public function iComputeTheAbsoluteValueOf(string $number): void
+    {
+        $this->result = $this->calculator->absolute((int) $number);
+    }
+
     #[Then('the result should be :expected')]
     public function theResultShouldBe(string $expected): void
     {
