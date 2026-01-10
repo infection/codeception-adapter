@@ -1,4 +1,5 @@
 !/.tools/.gitkeep
+!/tests/e2e/*/var/.gitkeep
 .phpunit.result.cache
 /.composer/
 /.idea

@@ -1,18 +1,24 @@
 {
     "require-dev": {
         "codeception/codeception": "^5.0",
+        "codeception/module-asserts": "^3.0.0",
         "codeception/module-db": "^3.0.0",
         "infection/infection": "@dev",
         "infection/codeception-adapter": "@dev"
     },
     "autoload": {
         "psr-4": {
-            "Codeception_With_Suite_Overridings\\": "src/"
+            "Codeception_With_Suite_Overridings\\": "src/",
+            "Codeception_With_Suite_Overridings\\Covered\\": "src/Covered/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Codeception_With_Suite_Overridings\\": "tests/integration"
+            "Codeception_With_Suite_Overridings\\": [
+                "tests/integration",
+                "tests/_support"
+            ],
+            "Codeception_With_Suite_Overridings\\Tests\\": "tests/"
         }
     },
     "config": {
