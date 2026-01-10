@@ -46,6 +46,8 @@ use Symfony\Component\Yaml\Yaml;
 
 final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 {
+    private const NAME = 'Codeception';
+
     private const COVERAGE_DIR = 'coverage-xml';
 
     /**
@@ -62,9 +64,10 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
         bool $skipCoverage,
     ): TestFrameworkAdapter {
         return new CodeceptionAdapter(
+            self::NAME,
             $testFrameworkExecutable,
             new CommandLineBuilder(),
-            new VersionParser(),
+            new VersionParser(self::NAME),
             new JUnitTestCaseSorter(),
             new Filesystem(),
             Path::makeRelative($jUnitFilePath, $tmpDir),
@@ -80,7 +83,7 @@ final class CodeceptionAdapterFactory implements TestFrameworkAdapterFactory
 
     public static function getAdapterName(): string
     {
-        return CodeceptionAdapter::NAME;
+        return 'codeception';
     }
 
     public static function getExecutableName(): string

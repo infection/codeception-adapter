@@ -79,6 +79,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
     private ?string $cachedVersion = null;
 
     public function __construct(
+        private readonly string $name,
         private string $testFrameworkExecutable,
         private CommandLineBuilder $commandLineBuilder,
         private VersionParser $versionParser,
@@ -137,7 +138,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
     public function getName(): string
     {
-        return self::NAME;
+        return $this->name;
     }
 
     public function getInitialTestRunCommandLine(string $extraOptions, array $phpExtraArgs, bool $skipCoverage): array

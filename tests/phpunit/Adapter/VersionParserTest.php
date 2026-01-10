@@ -45,7 +45,7 @@ final class VersionParserTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->versionParser = new VersionParser();
+        $this->versionParser = new VersionParser('TestCodeception');
     }
 
     /**
@@ -62,7 +62,7 @@ final class VersionParserTest extends TestCase
     {
         $this->expectExceptionObject(
             new InvalidVersion(
-                'Could not recognise the test framework version for codeception for the value "abc".',
+                'Could not recognise the test framework version for TestCodeception for the value "abc".',
             ),
         );
 
