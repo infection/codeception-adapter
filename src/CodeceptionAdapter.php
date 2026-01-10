@@ -234,9 +234,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         $process = new Process($testFrameworkVersionExecutable);
         $process->mustRun();
 
-        $this->cachedVersion = $this->versionParser->parse($process->getOutput());
-
-        return $this->cachedVersion;
+        return $this->cachedVersion ??= $this->versionParser->parse($process->getOutput());
     }
 
     public function getInitialTestsFailRecommendations(string $commandLine): string
