@@ -1,0 +1,9 @@
+# Codeception Test Suite Configuration
+#
+# Suite for functional tests using Cest format.
+
+actor: FunctionalTester
+modules:
+    enabled:
+        - Asserts
+        - \Codeception_With_Suite_Overridings\Helper\Functional

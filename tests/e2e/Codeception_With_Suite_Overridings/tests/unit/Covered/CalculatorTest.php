@@ -11,68 +11,74 @@ class CalculatorTest extends \Codeception\Test\Unit
      */
     protected $tester;
 
+    private Calculator $calculator;
+
     protected function _before()
     {
+        $this->calculator = new Calculator();
     }
 
     protected function _after()
     {
     }
 
-    public function testAddition()
+    /**
+     * @dataProvider \Codeception_With_Suite_Overridings\Tests\unit\Covered\CalculatorProvider::provideAdditions
+     */
+    public function testAddition(int $a, int $b, int $expected): void
     {
-        $calculator = new Calculator();
-        $this->assertSame(5, $calculator->add(2, 3));
-        $this->assertSame(0, $calculator->add(-5, 5));
-        $this->assertSame(-10, $calculator->add(-3, -7));
+        $this->assertSame($expected, $this->calculator->add($a, $b));
     }
 
-    public function testSubtraction()
+    /**
+     * @dataProvider provideSubtractions
+     */
+    public function testSubtraction(int $a, int $b, int $expected): void
     {
-        $calculator = new Calculator();
-        $this->assertSame(1, $calculator->subtract(3, 2));
-        $this->assertSame(-10, $calculator->subtract(-5, 5));
-        $this->assertSame(4, $calculator->subtract(-3, -7));
+        $this->assertSame($expected, $this->calculator->subtract($a, $b));
     }
 
-    public function testMultiplication()
+    public static function provideSubtractions(): iterable
     {
-        $calculator = new Calculator();
-        $this->assertSame(6, $calculator->multiply(2, 3));
-        $this->assertSame(-25, $calculator->multiply(-5, 5));
-        $this->assertSame(21, $calculator->multiply(-3, -7));
-        $this->assertSame(0, $calculator->multiply(5, 0));
+        yield [3, 2, 1];
+        yield [-5, 5, -10];
+        yield 'with a key' => [-3, -7, 4];
+        yield 'with a key with (\'"#::&|) special characters' => [5, 5, 0];
     }
 
-    public function testDivision()
+    public function testMultiplication(): void
     {
-        $calculator = new Calculator();
-        $this->assertSame(2.0, $calculator->divide(6, 3));
-        $this->assertSame(-1.0, $calculator->divide(-5, 5));
-        $this->assertSame(2.5, $calculator->divide(5, 2));
+        $this->assertSame(6, $this->calculator->multiply(2, 3));
+        $this->assertSame(-25, $this->calculator->multiply(-5, 5));
+        $this->assertSame(21, $this->calculator->multiply(-3, -7));
+        $this->assertSame(0, $this->calculator->multiply(5, 0));
     }
 
-    public function testDivisionByZero()
+    public function testDivision(): void
     {
-        $calculator = new Calculator();
+        $this->assertSame(2.0, $this->calculator->divide(6, 3));
+        $this->assertSame(-1.0, $this->calculator->divide(-5, 5));
+        $this->assertSame(2.5, $this->calculator->divide(5, 2));
+    }
+
+    public function testDivisionByZero(): void
+    {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Division by zero');
-        $calculator->divide(5, 0);
+        $this->calculator->divide(5, 0);
     }
 
-    public function testIsPositive()
+    public function testIsPositive(): void
     {
-        $calculator = new Calculator();
-        $this->assertTrue($calculator->isPositive(5));
-        $this->assertTrue($calculator->isPositive(0));
-        $this->assertFalse($calculator->isPositive(-5));
+        $this->assertTrue($this->calculator->isPositive(5));
+        $this->assertTrue($this->calculator->isPositive(0));
+        $this->assertFalse($this->calculator->isPositive(-5));
     }
 
-    public function testAbsolute()
+    public function testAbsolute(): void
     {
-        $calculator = new Calculator();
-        $this->assertSame(5, $calculator->absolute(5));
-        $this->assertSame(5, $calculator->absolute(-5));
-        $this->assertSame(0, $calculator->absolute(0));
+        $this->assertSame(5, $this->calculator->absolute(5));
+        $this->assertSame(5, $this->calculator->absolute(-5));
+        $this->assertSame(0, $this->calculator->absolute(0));
     }
 }

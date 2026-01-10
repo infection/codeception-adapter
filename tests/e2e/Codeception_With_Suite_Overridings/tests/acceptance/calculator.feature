@@ -38,3 +38,17 @@ Feature: Calculator
       | 5      | true     |
       | 0      | true     |
       | -5     | false    |
+
+  Scenario Outline: Computing absolute value with label "<label>"
+    Given I have a calculator
+    When I compute the absolute value of <number>
+    Then the result should be <expected>
+
+    Examples:
+      | label                       | number | expected |
+      | 42                          | 5      | 5        |
+      | positive number             | 10     | 10       |
+      | negative number             | -7     | 7        |
+      | zero                        | 0      | 0        |
+      | with special chars ('"#::&) | -15    | 15       |
+      | another "quoted" value      | -1     | 1        |
