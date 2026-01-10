@@ -43,7 +43,6 @@ use function assert;
 use function explode;
 use function implode;
 use Infection\AbstractTestFramework\Coverage\TestLocation;
-use Infection\AbstractTestFramework\InvalidVersion;
 use Infection\AbstractTestFramework\MemoryUsageAware;
 use Infection\AbstractTestFramework\TestFrameworkAdapter;
 use Infection\StreamWrapper\IncludeInterceptor;
@@ -235,15 +234,7 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
         $process = new Process($testFrameworkVersionExecutable);
         $process->mustRun();
 
-        try {
-            $version = $this->versionParser->parse($process->getOutput());
-        } catch (InvalidVersion) {
-            $version = 'unknown';
-        }
-
-        $this->cachedVersion = $version;
-
-        return $this->cachedVersion;
+        return $this->cachedVersion ??= $this->versionParser->parse($process->getOutput());
     }
 
     public function getInitialTestsFailRecommendations(string $commandLine): string
@@ -265,12 +256,11 @@ final class CodeceptionAdapter implements MemoryUsageAware, TestFrameworkAdapter
 
     private static function isDisableCoveragePhpOptionSupported(string $version): bool
     {
-        return $version !== 'unknown'
-            && version_compare(
-                $version,
-                self::MIN_VERSION_DISABLE_COVERAGE_PHP,
-                '>=',
-            );
+        return version_compare(
+            $version,
+            self::MIN_VERSION_DISABLE_COVERAGE_PHP,
+            '>=',
+        );
     }
 
     private function getInterceptorFileContent(string $interceptorPath, string $originalFilePath, string $mutatedFilePath): string
