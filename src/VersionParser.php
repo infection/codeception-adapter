@@ -46,6 +46,11 @@ class VersionParser
 {
     private const VERSION_REGEX = '/(?<version>[0-9]+\.[0-9]+\.?[0-9]*)(?<prerelease>-[0-9a-zA-Z.]+)?(?<build>\+[0-9a-zA-Z.]+)?/';
 
+    public function __construct(
+        private readonly string $name,
+    ) {
+    }
+
     /**
      * @throws InvalidVersion
      */
@@ -56,7 +61,7 @@ class VersionParser
 
         if (!$matched) {
             throw self::createInvalidVersion(
-                CodeceptionAdapter::NAME,
+                $this->name,
                 $content,
             );
         }

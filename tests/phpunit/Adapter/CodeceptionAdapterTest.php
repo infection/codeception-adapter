@@ -434,9 +434,10 @@ final class CodeceptionAdapterTest extends FileSystemTestCase
     private function createAdapter(?array $config = null, ?string $version = 'unknown'): CodeceptionAdapter
     {
         $adapter = new CodeceptionAdapter(
+            'codeception',
             '/path/to/codeception',
             new CommandLineBuilder(),
-            new VersionParser(),
+            new VersionParser('Codeception'),
             new JUnitTestCaseSorter(),
             new Filesystem(),
             'path/to/junit',
