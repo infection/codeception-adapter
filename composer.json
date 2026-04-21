@@ -32,10 +32,10 @@
         "php": "^8.3",
         "infection/abstract-testframework-adapter": "^0.5.0",
         "infection/include-interceptor": "^0.2.0",
-        "symfony/filesystem": "^6.4 || ^7.4",
-        "symfony/process": "^6.4 || ^7.4",
-        "symfony/yaml": "^6.4 || ^7.4",
-        "webmozart/assert": "^1.2 || ^2.0"
+        "symfony/filesystem": "^6.4 || ^7.4 || ^8.0",
+        "symfony/process": "^6.4 || ^7.4 || ^8.0",
+        "symfony/yaml": "^6.4 || ^7.4 || ^8.0",
+        "webmozart/assert": "^1.2 || ^2.0 || ^8.0"
     },
     "extra": {
         "infection": {

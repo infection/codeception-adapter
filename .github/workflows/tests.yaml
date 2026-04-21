@@ -26,6 +26,10 @@ jobs:
         symfony-require:
           - '6.4.*'
           - '7.4.*'
+          - '8.*'
+        exclude:
+            - php-version: '8.3'
+              symfony-require: '8.*'
 
     name: Unit tests on PHP ${{ matrix.php-version }} with Symfony ${{ matrix.symfony-require }} (${{ matrix.coverage-driver }})
 
