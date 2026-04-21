@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "24a42db2450ea3ec3f8118d8282d3330",
+    "content-hash": "549bacae9b4c035736602fd4cf877dd7",
     "packages": [
         {
             "name": "infection/abstract-testframework-adapter",
@@ -4126,8 +4126,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.2"
+        "php": "^8.3"
     },
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
