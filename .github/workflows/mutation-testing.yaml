@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-version: [ '8.2' ]
+        php-version: [ '8.3' ]
         coverage-driver: [ pcov ]
 
     name: Mutation testing with PHP ${{ matrix.php-version }} (${{ matrix.coverage-driver }})

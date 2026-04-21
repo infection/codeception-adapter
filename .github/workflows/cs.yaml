@@ -17,10 +17,13 @@ jobs:
   coding-standards:
     runs-on: ubuntu-latest
 
+    env:
+        PHP_CS_FIXER_IGNORE_ENV: '1'
+
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
-        php-version: [ '8.2' ]
+        php-version: [ '8.3' ]
         check:
           - makefile-target: 'cs-lint'
             name: 'CS'
