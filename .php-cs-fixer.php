@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This code is licensed under the BSD 3-Clause License.
  *
@@ -31,8 +32,6 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-declare(strict_types=1);
-
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
@@ -59,10 +58,6 @@ $finder = Finder::create()
 return (new Config())
     ->setRiskyAllowed(true)
     ->setRules([
-        '@PHP71Migration' => true,
-        '@PHP71Migration:risky' => true,
-        '@PHPUnit60Migration:risky' => true,
-        '@PHPUnit75Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'blank_line_before_statement' => [

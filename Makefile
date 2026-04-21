@@ -12,7 +12,7 @@ help:
 
 # PHP CS Fixer
 PHP_CS_FIXER=./.tools/php-cs-fixer
-PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.35.1/php-cs-fixer.phar"
+PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.95.1/php-cs-fixer.phar"
 
 # PHPUnit
 PHPUNIT=vendor/bin/phpunit
