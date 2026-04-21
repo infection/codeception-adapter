@@ -6,10 +6,10 @@
 /.php-cs-fixer.cache
 /.tools/
 /build/
+/composer.lock
 /infection.log
 /tests/**/_generated/
 /tests/**/_output/
 /tests/e2e/*/var/
 /var/
 /vendor/
-/composer.lock
