@@ -17,6 +17,9 @@ jobs:
   coding-standards:
     runs-on: ubuntu-latest
 
+    env:
+        PHP_CS_FIXER_IGNORE_ENV: '1'
+
     strategy:
       matrix:
         operating-system: [ ubuntu-latest ]
