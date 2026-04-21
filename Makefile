@@ -10,9 +10,17 @@ help:
 	@fgrep -h "##" $(MAKEFILE_LIST) | fgrep -v fgrep | sed -e 's/\\$$//' | sed -e 's/##//' | awk 'BEGIN {FS = ":"}; {printf "\033[33m%s:\033[0m%s\n", $$1, $$2}'
 
 
+TOOL_DOWNLOAD_DIR := var/download
+TOOL_DIR := var/tools
+
 # PHP CS Fixer
-PHP_CS_FIXER=./.tools/php-cs-fixer
-PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v3.35.1/php-cs-fixer.phar"
+PHP_CS_FIXER := $(TOOL_DIR)/php-cs-fixer.phar
+PHP_CS_FIXER_VERSION := .tools/php-cs-fixer-version
+PHP_CS_FIXER_GPG_KEY := E82B2FB314E9906E
+TMP_PHP_CS_FIXER := $(TOOL_DOWNLOAD_DIR)/$(shell basename $(PHP_CS_FIXER))
+TMP_PHP_CS_FIXER_SIGNATURE := $(TMP_PHP_CS_FIXER).asc
+PHP_CS_FIXER_URL := "https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/$(shell cat $(PHP_CS_FIXER_VERSION))/php-cs-fixer.phar"
+PHP_CS_FIXER_URL_SIGNATURE := "https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/$(shell cat $(PHP_CS_FIXER_VERSION))/php-cs-fixer.phar.asc"
 
 # PHPUnit
 PHPUNIT=vendor/bin/phpunit
@@ -95,7 +103,26 @@ $(INFECTION): Makefile
 	chmod a+x $(INFECTION)
 	touch $@
 
-$(PHP_CS_FIXER): Makefile
-	wget -q $(PHP_CS_FIXER_URL) --output-document=$(PHP_CS_FIXER)
-	chmod a+x $(PHP_CS_FIXER)
-	touch $@
+$(PHP_CS_FIXER): $(PHP_CS_FIXER_VERSION)
+	$(MAKE) $(TMP_PHP_CS_FIXER)
+
+	mkdir -p $(TOOL_DOWNLOAD_DIR)
+	mv $(TMP_PHP_CS_FIXER) $@
+	touch -c $@
+
+$(TMP_PHP_CS_FIXER): $(PHP_CS_FIXER_VERSION)
+	mkdir -p $(TOOL_DOWNLOAD_DIR)
+	wget --quiet $(PHP_CS_FIXER_URL) --output-document=$@
+	wget --quiet $(PHP_CS_FIXER_URL_SIGNATURE) --output-document=$(TMP_PHP_CS_FIXER_SIGNATURE)
+
+	@echo "Importing GPG key..."
+	@gpg --keyserver hkps://keys.openpgp.org --recv-keys $(PHP_CS_FIXER_GPG_KEY) >/dev/null 2>&1 || \
+		(echo "ERROR: Failed to import GPG key" && rm -f $@ $(TMP_PHP_CS_FIXER_SIGNATURE) && exit 1)
+	@echo "Verifying signature..."
+	@gpg --verify $(TMP_PHP_CS_FIXER_SIGNATURE) $@ >/dev/null 2>&1 || \
+		(echo "ERROR: Signature verification FAILED!" && rm -f $@ $(TMP_PHP_CS_FIXER_SIGNATURE) && exit 1)
+	@echo "✓ Signature verification passed"
+	rm -f $(TMP_PHP_CS_FIXER_SIGNATURE)
+
+	chmod a+x $@
+	PHP_CS_FIXER_IGNORE_ENV=1 $@ --version
