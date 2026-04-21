@@ -16,6 +16,8 @@ PHP_CS_FIXER_URL="https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download
 
 # PHPUnit
 PHPUNIT=vendor/bin/phpunit
+PHPUNIT_COVERAGE_CLOVER=--coverage-clover=build/logs/clover.xml
+PHPUNIT_ARGS=--coverage-xml=build/logs/coverage-xml --log-junit=build/logs/junit.xml $(PHPUNIT_COVERAGE_CLOVER)
 
 # PHPStan
 PHPSTAN=vendor/bin/phpstan
@@ -67,7 +69,7 @@ phpstan:
 
 .PHONY: test-unit
 test-unit: vendor/autoload.php
-	$(PHPUNIT)
+	$(PHPUNIT) $(PHPUNIT_ARGS)
 
 .PHONY: test-e2e
 test-e2e: vendor/autoload.php
